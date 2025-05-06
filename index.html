@@ -1015,7 +1015,7 @@
             </li>
 
             <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
+              <a href="javascript:void(0);" class="project-open" data-project-id="3">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -1033,7 +1033,7 @@
             </li>
 
             <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
+              <a href="javascript:void(0);" class="project-open" data-project-id="4">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -1046,6 +1046,24 @@
                 <h3 class="project-title">Task Manager</h3>
 
                 <p class="project-category">Applications</p>
+
+              </a>
+            </li>
+
+            <li class="project-item  active" data-filter-item data-category="web development">
+              <a href="javascript:void(0);" class="project-open" data-project-id="2">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-2.jpg" alt="Fashion Website" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">E-Commerce Web Sitesi</h3>
+
+                <p class="project-category">Web Geliştirme</p>
 
               </a>
             </li>
@@ -1887,21 +1905,28 @@
 
           <h3 class="h3 form-title">İletişim Formu</h3>
 
-          <form action="#" class="form" id="contact-form" data-form>
+          <!-- Netlify Form - %100 çalışacakıtr -->
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form" id="contact-form" data-form>
+            <!-- Netlify form için gizli alan -->
+            <input type="hidden" name="form-name" value="contact" />
+            <p style="display:none">
+              <label>Doldurmayın: <input name="bot-field" /></label>
+            </p>
 
             <div class="input-wrapper">
-              <input type="text" name="from_name" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="text" name="name" class="form-input" placeholder="İsim Ve Soyisim" required data-form-input>
 
-              <input type="email" name="reply_to" class="form-input" placeholder="Email address" required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="Email Adresiniz" required data-form-input>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <textarea name="message" class="form-input" placeholder="Mesajınız" required data-form-input></textarea>
 
-            <div id="form-result" style="margin-bottom: 15px;"></div>
+            <div id="form-result" style="margin-bottom: 15px; display: none;"></div>
 
-            <button class="form-btn" type="submit" disabled data-form-btn>
+            <button class="form-btn" type="submit" data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
+              <span class="tr">Mesaj Gönder</span>
+              <span class="en">Send Message</span>
             </button>
 
           </form>
