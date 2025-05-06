@@ -358,12 +358,10 @@ $(document).ready(function() {
 
   /**
    * *** FORM İŞLEMLERİ ***
-   * İletişim formu için Netlify entegrasyonu
+   * İletişim formu için FormSubmit.co entegrasyonu
+   * Not: Form işleme kodu index.html içinde yer alıyor
    */
-  $("#contact-form").on("submit", function() {
-    console.log("Form gönderildi - Netlify tarafından işlenecek");
-    // Netlify formları otomatik olarak işler, burada ek bir işlem yapmaya gerek yok
-  });
+  // Form yalnızca index.html içinde FormSubmit.co tarafından işleniyor
 
   /**
    * *** DEBUG BİLGİLERİ ***
