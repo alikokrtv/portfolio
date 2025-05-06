@@ -1923,6 +1923,56 @@
   <!--
     - custom js link
   -->
+  <script src="https://unpkg.com/emailjs-com@3/dist/email.min.js"></script>
+  
+  <!-- Modals -->
+  <div id="blog-modal-container" class="modal-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 1000; overflow: auto;">
+    <div class="blog-modal" style="position: relative; background-color: #222; color: #fff; width: 80%; max-width: 800px; margin: 50px auto; padding: 20px; border-radius: 5px;">
+      <div class="blog-modal-close" style="position: absolute; right: 20px; top: 10px; font-size: 28px; cursor: pointer;">&times;</div>
+      <h3 id="blog-modal-title" class="h3"></h3>
+      <div id="blog-modal-meta" class="blog-meta"></div>
+      <div id="blog-modal-content"></div>
+    </div>
+  </div>
+  
+  <div id="project-modal-container" class="modal-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 1000; overflow: auto;">
+    <div class="project-modal" style="position: relative; background-color: #222; color: #fff; width: 80%; max-width: 800px; margin: 50px auto; padding: 20px; border-radius: 5px;">
+      <div class="project-modal-close" style="position: absolute; right: 20px; top: 10px; font-size: 28px; cursor: pointer;">&times;</div>
+      <h3 id="project-modal-title" class="h3"></h3>
+      <div id="project-modal-category"></div>
+      <div id="project-modal-content"></div>
+      <div id="project-modal-links"></div>
+    </div>
+  </div>
+
+  <!-- EmailJS Konfigürasyonu -->
+<script type="text/javascript">
+  (function() {
+    emailjs.init('iwzl pleq kiqt sgvn');
+  })();
+  
+  // İletişim formu gönderimi
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Loading durumunu göster
+    document.getElementById('form-result').style.display = 'block';
+    document.getElementById('form-result').innerHTML = '<p>Mesaj gönderiliyor...</p>';
+    
+    // EmailJS ile formu gönder
+    emailjs.sendForm('service_3jxhhgr', 'template_1lq7l2k', this, 'iwzl pleq kiqt sgvn')
+      .then(function() {
+        document.getElementById('form-result').innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
+        document.getElementById('contact-form').reset();
+      })
+      .catch(function(error) {
+        document.getElementById('form-result').innerHTML = '<p style="color: red;">Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>';
+        console.log('EmailJS Error:', error);
+      });
+  });
+</script>
+  
+  <!-- custom js link -->
   <script src="./assets/js/script.js"></script>
 
   <!--
@@ -2214,6 +2264,26 @@
       }
     });
   </script>
+  <!-- Blog Modal -->
+<div id="blog-modal-container" class="modal-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 1000; overflow: auto;">
+  <div class="blog-modal" style="position: relative; background-color: #222; color: #fff; width: 80%; max-width: 800px; margin: 50px auto; padding: 20px; border-radius: 5px;">
+    <div class="blog-modal-close" style="position: absolute; right: 20px; top: 10px; font-size: 28px; cursor: pointer;">&times;</div>
+    <h3 id="blog-modal-title" class="h3"></h3>
+    <div id="blog-modal-meta" class="blog-meta"></div>
+    <div id="blog-modal-content"></div>
+  </div>
+</div>
+
+<!-- Project Modal -->
+<div id="project-modal-container" class="modal-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 1000; overflow: auto;">
+  <div class="project-modal" style="position: relative; background-color: #222; color: #fff; width: 80%; max-width: 800px; margin: 50px auto; padding: 20px; border-radius: 5px;">
+    <div class="project-modal-close" style="position: absolute; right: 20px; top: 10px; font-size: 28px; cursor: pointer;">&times;</div>
+    <h3 id="project-modal-title" class="h3"></h3>
+    <div id="project-modal-category"></div>
+    <div id="project-modal-content"></div>
+    <div id="project-modal-links"></div>
+  </div>
+</div>
 
 </body>
 
