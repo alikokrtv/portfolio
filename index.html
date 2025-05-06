@@ -1936,9 +1936,9 @@
           <!-- EmailJS Form -->
           <form class="form" id="contact-form" data-form>
             <div class="input-wrapper">
-              <input type="text" name="from_name" class="form-input" placeholder="İsim Ve Soyisim" required data-form-input>
+              <input type="text" name="name" class="form-input" placeholder="İsim Ve Soyisim" required data-form-input>
 
-              <input type="email" name="reply_to" class="form-input" placeholder="Email Adresiniz" required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="Email Adresiniz" required data-form-input>
             </div>
 
             <textarea name="message" class="form-input" placeholder="Mesajınız" required data-form-input></textarea>
@@ -1953,38 +1953,53 @@
 
           </form>
           
-          <!-- Basit Form Gönderim Script'i -->
+          <!-- FormSubmit.co ile Form Gönderim Sistemi -->
           <script>
             document.addEventListener('DOMContentLoaded', function() {
               var contactForm = document.getElementById('contact-form');
               var formResult = document.getElementById('form-result');
               
               if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                  e.preventDefault();
-                  
-                  // Form verilerini topla
-                  const name = this.querySelector('[name="from_name"]').value;
-                  const email = this.querySelector('[name="reply_to"]').value;
-                  const message = this.querySelector('[name="message"]').value;
-                  
-                  // Alındı mesajı gösterme (gerçek gönderim yapmıyoruz)
+                // FormSubmit.co servisine form bağlantısı - Lütfen kendi email adresinizi girin
+                contactForm.setAttribute('action', 'https://formsubmit.co/alikokrtv@example.com');
+                contactForm.setAttribute('method', 'POST');
+                
+                // Gizli alanlar ekleme
+                const hiddenInput1 = document.createElement('input');
+                hiddenInput1.setAttribute('type', 'hidden');
+                hiddenInput1.setAttribute('name', '_subject');
+                hiddenInput1.setAttribute('value', 'Yeni Portfolyo İletişim Formu Mesajı!');
+                contactForm.appendChild(hiddenInput1);
+                
+                const hiddenInput2 = document.createElement('input');
+                hiddenInput2.setAttribute('type', 'hidden');
+                hiddenInput2.setAttribute('name', '_captcha');
+                hiddenInput2.setAttribute('value', 'false');
+                contactForm.appendChild(hiddenInput2);
+                
+                const hiddenInput3 = document.createElement('input');
+                hiddenInput3.setAttribute('type', 'hidden');
+                hiddenInput3.setAttribute('name', '_next');
+                hiddenInput3.setAttribute('value', window.location.href);
+                contactForm.appendChild(hiddenInput3);
+                
+                // Form gönderildiğinde kullanıcıya bilgi verme
+                contactForm.addEventListener('submit', function() {
+                  // Form her gönderildiğinde, FormSubmit.co sayfa yönlendirmesi yapacak
+                  localStorage.setItem('formSubmitted', 'true');
+                });
+                
+                // Sayfa yüklenirken form gönderildi mi diye kontrol et
+                if (localStorage.getItem('formSubmitted') === 'true') {
                   formResult.innerHTML = `
                     <div style="background-color: var(--eerie-black-2); padding: 15px; border-radius: 8px; border-left: 4px solid var(--orange-yellow-crayola);">
-                      <h4 style="margin-top: 0; color: var(--orange-yellow-crayola);">Mesajınız alındı!</h4>
-                      <p><strong>Ad:</strong> ${name}</p>
-                      <p><strong>E-posta:</strong> ${email}</p>
-                      <p><strong>Mesaj:</strong> ${message}</p>
-                      <p style="margin-bottom: 0;"><em>Not: Bu bir demo formudur. Gerçek gönderim için EmailJS kurulumu yapmanız gerekir.</em></p>
+                      <h4 style="margin-top: 0; color: var(--orange-yellow-crayola);">Teşekkürler!</h4>
+                      <p>Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağım.</p>
                     </div>
                   `;
                   formResult.style.display = 'block';
-                  
-                  // Formu sıfırla
-                  contactForm.reset();
-                  
-                  console.log('Form demo modu - gönderim simüle edildi.');
-                });
+                  localStorage.removeItem('formSubmitted');
+                }
               }
             });
           </script>
