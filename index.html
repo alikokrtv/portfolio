@@ -16,6 +16,7 @@
     - custom css link
   -->
   <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/modal.css">
 
   <!--
     - google font link
@@ -907,7 +908,7 @@
           <ul class="project-list">
 
             <li class="project-item active" data-filter-item data-category="açık kaynak">
-              <a href="javascript:void(0);" class="project-open" data-project-id="project1">
+              <a href="javascript:void(0);" class="project-open" data-project-id="1">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -925,7 +926,7 @@
             </li>
 
             <li class="project-item active" data-filter-item data-category="kurumsal">
-              <a href="javascript:void(0);" class="project-open" data-project-id="project2">
+              <a href="javascript:void(0);" class="project-open" data-project-id="2">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -1112,7 +1113,7 @@
           <ul class="blog-posts-list">
 
             <li class="blog-post-item">
-              <a href="javascript:void(0);" class="blog-open" data-blog-id="blog1">
+              <a href="javascript:void(0);" class="blog-open" data-blog-id="1">
 
                 <figure class="blog-banner-box">
                   <img src="./assets/images/blog-1.jpg" alt="Web Geliştirme Yolculuğum" loading="lazy">
@@ -1140,7 +1141,7 @@
             </li>
 
             <li class="blog-post-item">
-              <a href="javascript:void(0);" class="blog-open" data-blog-id="blog2">
+              <a href="javascript:void(0);" class="blog-open" data-blog-id="2">
 
                 <figure class="blog-banner-box">
                   <img src="./assets/images/blog-2.jpg" alt="WordPress Eklenti Geliştirme" loading="lazy">
@@ -1168,7 +1169,7 @@
             </li>
 
             <li class="blog-post-item">
-              <a href="javascript:void(0);" class="blog-open" data-blog-id="blog3">
+              <a href="javascript:void(0);" class="blog-open" data-blog-id="3">
 
                 <figure class="blog-banner-box">
                   <img src="./assets/images/blog-3.jpg" alt="Açık Kaynak Yazılım" loading="lazy">
@@ -1200,12 +1201,39 @@
         </section>
         
         <!-- Blog Modal Containers -->
-        <div id="blog-modal-container" class="modal-container" style="display: none;">
+        <div id="blog-modal-1" class="modal-container" style="display: none;">
           <div class="blog-modal">
-            <div class="blog-modal-close">&times;</div>
-            <h3 id="blog-modal-title" class="h3"></h3>
-            <div id="blog-modal-meta" class="blog-meta"></div>
-            <div id="blog-modal-content"></div>
+            <div class="modal-close">&times;</div>
+            <h3 class="blog-modal-title">Web Geliştirme Yolculuğum</h3>
+            <div class="blog-modal-meta">1 Mayıs 2023 | Web Geliştirme</div>
+            <div class="blog-modal-content">
+              <p>Web geliştirme yolculuğumda kullandığım teknolojiler ve öğrenme sürecim hakkında detaylı bir yazı. Front-end tarafında HTML, CSS ve JavaScript ile başlayan yolculuğum, zamanla React ve Vue.js gibi modern framework'lere doğru ilerledi.</p>
+              <p>Ardından back-end tarafında PHP öğrenerek tam yığın (full-stack) geliştirici olma yolunda ilerledim. Bu süreçte karşılaştığım zorluklar ve bunları nasıl aştığım hakkında ipuçları bulabilirsiniz.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div id="blog-modal-2" class="modal-container" style="display: none;">
+          <div class="blog-modal">
+            <div class="modal-close">&times;</div>
+            <h3 class="blog-modal-title">WordPress'te Özel Eklenti Geliştirme</h3>
+            <div class="blog-modal-meta">15 Nisan 2023 | WordPress</div>
+            <div class="blog-modal-content">
+              <p>WordPress için özel eklenti geliştirme sürecimi anlattığım bu yazıda, ACF ve WPForms'un gücünden nasıl yararlandığımı okuyabilirsiniz. Kurumsal müşterilerim için geliştirdiğim özel rezervasyon ve form sistemleri, işlerini daha verimli hale getirdi.</p>
+              <p>Yazıda ayrıca WordPress eklenti geliştirme için gerekli temel bilgiler ve en iyi uygulamalar da yer alıyor. Kendi eklentinizi geliştirmek istiyorsanız, bu rehber size yardımcı olabilir.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div id="blog-modal-3" class="modal-container" style="display: none;">
+          <div class="blog-modal">
+            <div class="modal-close">&times;</div>
+            <h3 class="blog-modal-title">Açık Kaynak Projelere Katkıda Bulunmak</h3>
+            <div class="blog-modal-meta">20 Mart 2023 | Açık Kaynak</div>
+            <div class="blog-modal-content">
+              <p>Açık kaynak projelere katkıda bulunmanın hem kişisel gelişim hem de topluluk için ne kadar önemli olduğunu anlatan bu yazıda, GitHub üzerinden pull request göndererek başladığım yolculuğun kariyer gelişimimdeki etkilerini paylaşıyorum.</p>
+              <p>Açık kaynak projeler, kodlama becerilerinizi geliştirmek, yeni insanlarla tanışmak ve sektördeki en iyi uygulamaları öğrenmek için mükemmel bir platformdur. Bu yazıda, başlangıç yapacaklar için ipuçları ve tavsiyeler de bulabilirsiniz.</p>
+            </div>
           </div>
         </div>
 
@@ -1931,34 +1959,19 @@
 
           </form>
           
-          <!-- Form için özel script -->
+          <!-- Netlify form gönderim başarı mesajını göstermek için script -->
           <script>
-            // Form yüklendiğinde çalış
             document.addEventListener('DOMContentLoaded', function() {
               var contactForm = document.getElementById('contact-form');
-              var formResult = document.getElementById('form-result');
-              
               if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                  e.preventDefault();
-                  
-                  formResult.style.display = 'block';
-                  formResult.innerHTML = '<p>Mesaj gönderiliyor...</p>';
-                  
-                  // EmailJS ile formu gönder
-                  emailjs.send('service_3jxhhgr', 'template_1lq7l2k', {
-                    from_name: this.querySelector('[name="from_name"]').value,
-                    reply_to: this.querySelector('[name="reply_to"]').value,
-                    message: this.querySelector('[name="message"]').value
-                  }, 'iwzl pleq kiqt sgvn')
-                  .then(function() {
-                    formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
-                    contactForm.reset();
-                  })
-                  .catch(function(error) {
-                    formResult.innerHTML = '<p style="color: red;">Mesaj gönderilirken hata oluştu: ' + error.message + '</p>';
-                    console.error('EmailJS Error:', error);
-                  });
+                contactForm.addEventListener('submit', function() {
+                  // Form başarıyla gönderildiğinde Netlify sayfayı yönlendirecek
+                  // Bu sadece kullanıcıya bir bildirim göstermek için
+                  setTimeout(function() {
+                    document.getElementById('form-result').innerHTML = 
+                      '<p style="color: var(--orange-yellow-crayola);">Teşekkürler! Mesajınız başarıyla gönderildi.</p>';
+                    document.getElementById('form-result').style.display = 'block';
+                  }, 500);
                 });
               }
             });
@@ -2006,6 +2019,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   
   <!-- custom js link -->
+  <script src="./assets/js/project-data.js"></script>
   <script src="./assets/js/script.js"></script>
 
   <!--

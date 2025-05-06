@@ -2,276 +2,310 @@
 
 // Belgenin tamamen yüklenmesini bekleyip kodları çalıştırır
 $(document).ready(function() {
-  
   console.log('Sayfa yüklendi, jQuery hazır!');
-  
-  // Element toggle fonksiyonu
-  function elementToggleFunc(elem) {
-    elem.classList.toggle("active");
+
+  /**
+   * Element toggle fonksiyonu
+   */
+  const elemToggleFunc = function(elem) { 
+    elem.classList.toggle("active"); 
   }
 
-  // Sidebar değişkenleri ve işlevselliği
-  const sidebar = document.querySelector("[data-sidebar]");
-  const sidebarBtn = document.querySelector("[data-sidebar-btn]");
+  /**
+   * Header sticky & go to top
+   */
+  const header = document.querySelector("[data-header]");
+  const goTopBtn = document.querySelector("[data-go-top]");
 
-  if (sidebarBtn) {
-    sidebarBtn.addEventListener("click", function() {
-      elementToggleFunc(sidebar);
-    });
-  }
-
-  // Testimonials değişkenleri
-  const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-  const modalContainer = document.querySelector("[data-modal-container]");
-  const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-  const overlay = document.querySelector("[data-overlay]");
-
-  // Modal değişkenleri
-  const modalImg = document.querySelector("[data-modal-img]");
-  const modalTitle = document.querySelector("[data-modal-title]");
-  const modalText = document.querySelector("[data-modal-text]");
-
-  // Modal açma/kapama fonksiyonu
-  const testimonialsModalFunc = function() {
-    if (modalContainer) modalContainer.classList.toggle("active");
-    if (overlay) overlay.classList.toggle("active");
-  }
-
-  // Testimonial öğelerine tıklama olayı ekleme
-  testimonialsItem.forEach(function(item) {
-    item.addEventListener("click", function() {
-      if (modalImg && this.querySelector("[data-testimonials-avatar]")) {
-        modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-        modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-      }
-      if (modalTitle && this.querySelector("[data-testimonials-title]")) {
-        modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-      }
-      if (modalText && this.querySelector("[data-testimonials-text]")) {
-        modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-      }
-      testimonialsModalFunc();
-    });
+  $(window).on("scroll", function() {
+    if (window.scrollY >= 10) {
+      $(header).addClass("active");
+      $(goTopBtn).addClass("active");
+    } else {
+      $(header).removeClass("active");
+      $(goTopBtn).removeClass("active");
+    }
   });
 
-  // Modal kapatma butonuna tıklama olayı ekleme
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-  }
-  
-  if (overlay) {
-    overlay.addEventListener("click", testimonialsModalFunc);
-  }
+  /**
+   * Navbar toggle
+   */
+  const navToggleBtn = document.querySelector("[data-nav-toggle-btn]");
+  const navbar = document.querySelector("[data-navbar]");
 
-  // Filtreleme işlevselliği
-  const select = document.querySelector("[data-select]");
-  const selectItems = document.querySelectorAll("[data-select-item]");
-  const selectValue = document.querySelector("[data-selecct-value]");
-  const filterBtn = document.querySelectorAll("[data-filter-btn]");
-
-  if (select) {
-    select.addEventListener("click", function() {
-      elementToggleFunc(this);
-    });
-  }
-
-  // Filtreleme öğelerine tıklama olayı ekleme
-  selectItems.forEach(function(item) {
-    item.addEventListener("click", function() {
-      let selectedValue = this.innerText.toLowerCase();
-      if (selectValue) selectValue.innerText = this.innerText;
-      if (select) elementToggleFunc(select);
-      filterFunc(selectedValue);
-    });
+  $(navToggleBtn).on("click", function() {
+    elemToggleFunc(navToggleBtn);
+    elemToggleFunc(navbar);
+    elemToggleFunc(document.body);
   });
 
-  // Filtreleme değişkenleri
-  const filterItems = document.querySelectorAll("[data-filter-item]");
+  /**
+   * Skills toggle
+   */
+  const toggleBtnBox = document.querySelector("[data-toggle-box]");
+  const toggleBtns = document.querySelectorAll("[data-toggle-btn]");
+  const skillsBox = document.querySelector("[data-skills-box]");
 
-  // Filtreleme fonksiyonu
-  const filterFunc = function(selectedValue) {
-    filterItems.forEach(function(item) {
-      if (selectedValue === "all" || selectedValue === item.dataset.category) {
-        item.classList.add("active");
-      } else {
-        item.classList.remove("active");
-      }
-    });
+  $("[data-toggle-btn]").on("click", function() {
+    elemToggleFunc(toggleBtnBox);
+    toggleBtns.forEach(btn => elemToggleFunc(btn));
+    elemToggleFunc(skillsBox);
+  });
+
+  /**
+   * Dark & light theme toggle
+   */
+  const themeToggleBtn = document.querySelector("[data-theme-btn]");
+
+  $(themeToggleBtn).on("click", function() {
+    elemToggleFunc(themeToggleBtn);
+
+    if (themeToggleBtn.classList.contains("active")) {
+      document.body.classList.remove("light_theme");
+      document.body.classList.add("dark_theme");
+      localStorage.setItem("theme", "dark_theme");
+    } else {
+      document.body.classList.add("light_theme");
+      document.body.classList.remove("dark_theme");
+      localStorage.setItem("theme", "light_theme");
+    }
+  });
+
+  /**
+   * Check & apply last time selected theme from localStorage
+   */
+  if (localStorage.getItem("theme") === "light_theme") {
+    themeToggleBtn.classList.remove("active");
+    document.body.classList.remove("dark_theme");
+    document.body.classList.add("light_theme");
+  } else {
+    themeToggleBtn.classList.add("active");
+    document.body.classList.remove("light_theme");
+    document.body.classList.add("dark_theme");
   }
 
-  // Filtreleme butonlarına tıklama olayı ekleme
-  let lastClickedBtn = filterBtn[0];
+  /**
+   * Dil değiştirme fonksiyonu
+   */
+  const langToggleBtn = document.querySelector("[data-language-btn]");
+  const trElements = $(".tr");
+  const enElements = $(".en");
 
-  filterBtn.forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      let selectedValue = this.innerText.toLowerCase();
-      if (selectValue) selectValue.innerText = this.innerText;
-      filterFunc(selectedValue);
-      if (lastClickedBtn) lastClickedBtn.classList.remove("active");
-      this.classList.add("active");
-      lastClickedBtn = this;
-    });
+  // Dil ayarlama fonksiyonu
+  function setLanguage(lang) {
+    if (lang === "tr") {
+      trElements.show();
+      enElements.hide();
+    } else if (lang === "en") {
+      trElements.hide();
+      enElements.show();
+    }
+  }
+
+  // Sayfayı yüklerken düzen bozulmasını önlemek için
+  if (localStorage.getItem("language")) {
+    const savedLang = localStorage.getItem("language");
+    setLanguage(savedLang);
+    
+    if (savedLang === "en") {
+      langToggleBtn.classList.add("active");
+    } else {
+      langToggleBtn.classList.remove("active");
+    }
+  } else {
+    // Varsayılan olarak Türkçe
+    setLanguage("tr");
+    langToggleBtn.classList.remove("active");
+  }
+
+  // Dil butonuna tıklama işlemi
+  $(langToggleBtn).on("click", function() {
+    elemToggleFunc(langToggleBtn);
+    
+    if (langToggleBtn.classList.contains("active")) {
+      setLanguage("en");
+      localStorage.setItem("language", "en");
+    } else {
+      setLanguage("tr");
+      localStorage.setItem("language", "tr");
+    }
   });
 
-  // İletişim formu değişkenleri
-  const form = document.querySelector("[data-form]");
-  const formInputs = document.querySelectorAll("[data-form-input]");
-  const formBtn = document.querySelector("[data-form-btn]");
-
-  // Form girişlerine olay dinleyicisi ekleme
-  formInputs.forEach(function(input) {
-    input.addEventListener("input", function() {
-      // Form doğruluğunu kontrol et
-      if (form && form.checkValidity()) {
-        if (formBtn) formBtn.removeAttribute("disabled");
-      } else {
-        if (formBtn) formBtn.setAttribute("disabled", "");
-      }
-    });
-  });
-
-  // Sayfa gezinme değişkenleri
+  /**
+   * Sayfa navigasyonu
+   */
   const navigationLinks = document.querySelectorAll("[data-nav-link]");
   const pages = document.querySelectorAll("[data-page]");
 
   // Tüm gezinme bağlantılarına olay dinleyicisi ekleme
-  navigationLinks.forEach(function(link, i) {
+  navigationLinks.forEach(function(link) {
     link.addEventListener("click", function() {
-      // Orijinal veri kümesi değerini al
-      let pageType = "";
-      
-      // Gezinme bağlantısının dizinini ilgili sayfaya eşleştir
-      if (i === 0) pageType = "about";
-      else if (i === 1) pageType = "resume";
-      else if (i === 2) pageType = "portfolio";
-      else if (i === 3) pageType = "blog";
-      else if (i === 4) pageType = "contact";
-      
+      const targetPage = document.querySelector(`[data-page="${this.dataset.navLink}"]`);
+
+      // Tüm sayfaları ve navigasyon linklerini deaktive et
       pages.forEach(function(page) {
-        if (page.dataset.page === pageType) {
-          page.classList.add("active");
-          window.scrollTo(0, 0);
-        } else {
-          page.classList.remove("active");
-        }
+        page.classList.remove("active");
       });
-      
-      // Gezinme bağlantıları için aktif durumu güncelle
-      navigationLinks.forEach(function(navLink, k) {
-        if (k === i) {
-          navLink.classList.add("active");
-        } else {
-          navLink.classList.remove("active");
-        }
+
+      navigationLinks.forEach(function(navLink) {
+        navLink.classList.remove("active");
       });
+
+      // Hedef sayfayı ve tıklanan navigasyon linkini aktifleştir
+      if (targetPage) {
+        targetPage.classList.add("active");
+        this.classList.add("active");
+      }
     });
   });
 
-  // *** BLOG VE PORTFOLYO MODALLARI ***
-  console.log('Blog ve portfolyo modal işlevsellikleri yükleniyor...');
-  
-  // Proje modalları için jQuery işlevselliği
-  $('.project-open').on('click', function(e) {
+  /**
+   * Portfolio Projeleri için Modal İşlemleri
+   */
+  $(".project-open").on("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
     
-    var projectId = $(this).data('project-id');
-    console.log('Proje modalı açılıyor: ID=' + projectId);
+    const projectId = $(this).data("project-id");
+    const modalSelector = `#project-modal-${projectId}`;
     
-    // Proje içeriği için bilgileri al
-    var projectInfo = getProjectContent(projectId);
+    console.log(`Proje modalı açılıyor: ID=${projectId}, Seçici=${modalSelector}`);
     
-    // Modal içeriğini güncelle
-    $('#project-modal-title').html(projectInfo.title);
-    $('#project-modal-category').html(projectInfo.category);
-    $('#project-modal-content').html(projectInfo.content);
-    $('#project-modal-links').html(projectInfo.links);
-    
-    // Modalı göster
-    $('#project-modal-container').fadeIn();
-    return false;
-  });
-  
-  // Blog modalları için jQuery işlevselliği
-  $('.blog-open').on('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    var blogId = $(this).data('blog-id');
-    console.log('Blog modalı açılıyor: ID=' + blogId);
-    
-    // Blog içeriği için bilgileri al
-    var blogInfo = getBlogContent(blogId);
-    
-    // Modal içeriğini güncelle
-    $('#blog-modal-title').html(blogInfo.title);
-    $('#blog-modal-meta').html(blogInfo.meta);
-    $('#blog-modal-content').html(blogInfo.content);
-    
-    // Modalı göster
-    $('#blog-modal-container').fadeIn();
-    return false;
-  });
-  
-  // Modal kapatma butonları için jQuery işlevselliği
-  $('.blog-modal-close, .project-modal-close').on('click', function() {
-    $(this).closest('.modal-container').fadeOut();
-  });
-  
-  // Modal dışına tıklama ile kapatma için jQuery işlevselliği
-  $('.modal-container').on('click', function(e) {
-    if (e.target === this) {
-      $(this).fadeOut();
-    }
-  });
-  
-  // Netlify formunu yönet
-  $('#contact-form').on('submit', function(e) {
-    // Form gönderimini durdurma - Netlify otomatik olarak halledecek
-    // Bu kod sadece feedback için
-    var formResult = $('#form-result');
-    formResult.html('<p style="color: var(--orange-yellow-crayola);">Formunuz gönderiliyor...</p>').show();
-    
-    // 2 saniye sonra kullanıcıya bir geri bildirim göster
-    // Netlify forms zaten formu işleyecek
-    setTimeout(function() {
-      formResult.html('<p style="color: var(--orange-yellow-crayola);">Teşekkürler! Formunuz başarıyla gönderildi.</p>');
-    }, 2000);
-  });
-  
-  // Dil değiştirme işlevselliği
-  $('#language-toggle').on('click', function() {
-    var html = $('html');
-    if (html.attr('lang') === 'tr') {
-      html.attr('lang', 'en');
-      $(this).text('Türkçe');
+    if ($(modalSelector).length) {
+      $(modalSelector).fadeIn(300);
     } else {
-      html.attr('lang', 'tr');
-      $(this).text('English');
+      console.error(`Modal bulunamadı: ${modalSelector}`);
+      
+      // Modal içeriğini dinamik olarak oluştur
+      const projectInfo = getProjectContent(projectId.toString());
+      
+      // Modal HTML'ini oluştur
+      const modalHtml = `
+        <div id="project-modal-${projectId}" class="modal-container" style="display: none;">
+          <div class="project-modal">
+            <div class="modal-close">&times;</div>
+            <h3 class="project-modal-title">${projectInfo.title}</h3>
+            <div class="project-modal-category">${projectInfo.category}</div>
+            <div class="project-modal-content">${projectInfo.content}</div>
+            <div class="project-modal-links">${projectInfo.links || ''}</div>
+          </div>
+        </div>
+      `;
+      
+      // Modalı body'ye ekle
+      $("body").append(modalHtml);
+      
+      // Modal kapatma işlevini ekle
+      $(`#project-modal-${projectId} .modal-close`).on("click", function() {
+        $(this).closest(".modal-container").fadeOut(300);
+      });
+      
+      // Modalı göster
+      $(`#project-modal-${projectId}`).fadeIn(300);
+    }
+    
+    return false;
+  });
+
+  /**
+   * Blog için Modal İşlemleri
+   */
+  $(".blog-open").on("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const blogId = $(this).data("blog-id");
+    const modalSelector = `#blog-modal-${blogId}`;
+    
+    console.log(`Blog modalı açılıyor: ID=${blogId}, Seçici=${modalSelector}`);
+    
+    if ($(modalSelector).length) {
+      $(modalSelector).fadeIn(300);
+    } else {
+      console.error(`Blog modal bulunamadı: ${modalSelector}`);
+      
+      // Blog içeriğini dinamik olarak oluştur
+      const blogInfo = getBlogContent(blogId.toString());
+      
+      // Modal HTML'ini oluştur
+      const modalHtml = `
+        <div id="blog-modal-${blogId}" class="modal-container" style="display: none;">
+          <div class="blog-modal">
+            <div class="modal-close">&times;</div>
+            <h3 class="blog-modal-title">${blogInfo.title}</h3>
+            <div class="blog-modal-meta">${blogInfo.meta}</div>
+            <div class="blog-modal-content">${blogInfo.content}</div>
+          </div>
+        </div>
+      `;
+      
+      // Modalı body'ye ekle
+      $("body").append(modalHtml);
+      
+      // Modal kapatma işlevini ekle
+      $(`#blog-modal-${blogId} .modal-close`).on("click", function() {
+        $(this).closest(".modal-container").fadeOut(300);
+      });
+      
+      // Modalı göster
+      $(`#blog-modal-${blogId}`).fadeIn(300);
+    }
+    
+    return false;
+  });
+
+  /**
+   * Modal kapatma işlevleri
+   */
+  // Tüm modal kapatma butonlarına olay dinleyicisi ekle
+  $(document).on("click", ".modal-close", function() {
+    $(this).closest(".modal-container").fadeOut(300);
+  });
+
+  // Modal dışına tıklandığında modalı kapat
+  $(document).on("click", ".modal-container", function(e) {
+    if ($(e.target).hasClass("modal-container")) {
+      $(this).fadeOut(300);
     }
   });
+
+  /**
+   * Form İşlemleri - Netlify Form
+   */
+  $("#contact-form").on("submit", function() {
+    console.log("Form gönderildi - Netlify tarafından işlenecek");
+  });
+
+  /**
+   * Debug bilgileri
+   */
+  console.log("Modal kontrolleri:");
+  console.log("Project-open eleman sayısı: " + $(".project-open").length);
+  console.log("Blog-open eleman sayısı: " + $(".blog-open").length);
 });
 
-// Blog modalı için içerik yardımcı fonksiyonu
+/**
+ * Blog içeriği için yardımcı fonksiyon
+ */
 function getBlogContent(blogId) {
   switch(blogId) {
     case '1':
       return {
         title: 'Web Geliştirme Yolculuğum',
-        meta: '12 Nisan 2023 | Web Geliştirme',
-        content: '<p>Web geliştirme yolculuğuma nasıl başladığımı ve bugünlere nasıl geldiğimi anlatan bir yazı. Front-end ve back-end teknolojileri öğrenerek başladığım bu yolculukta, öğrendiğim en önemli şey sürekli kendini geliştirmenin önemi oldu.</p><p>Her zaman yeni teknolojileri takip ediyor ve projelerimde en uygun çözümleri sunmaya çalışıyorum. Bu blogu da deneyimlerimi paylaşmak ve diğer geliştiricilere yardımcı olmak için oluşturdum.</p>'
+        meta: '1 Mayıs 2023 | Web Geliştirme',
+        content: '<p>Web geliştirme yolculuğumda kullandığım teknolojiler ve öğrenme sürecim hakkında detaylı bir yazı. Front-end tarafında HTML, CSS ve JavaScript ile başlayan yolculuğum, zamanla React ve Vue.js gibi modern framework\'lere doğru ilerledi.</p><p>Ardından back-end tarafında PHP öğrenerek tam yığın (full-stack) geliştirici olma yolunda ilerledim. Bu süreçte karşılaştığım zorluklar ve bunları nasıl aştığım hakkında ipuçları bulabilirsiniz.</p>'
       };
     case '2':
       return {
-        title: 'WordPress Eklenti Geliştirme',
-        meta: '28 Haziran 2023 | WordPress',
-        content: '<p>WordPress için özel eklentiler geliştirmeye nasıl başladığımı ve bu süreçte karşılaştığım zorlukları anlatıyorum. WordPress ekosistemi içinde çalışmak, özellikle PHP bilgimi geliştirmeme yardımcı oldu.</p><p>Özellikle e-ticaret siteleri için geliştirdiğim eklentiler, işlemleri otomatikleştirerek iş süreçlerini hızlandırdı ve müşteri memnuniyetini artırdı. Bu süreçte edindiğim deneyimleri sizlerle paylaşıyorum.</p>'
+        title: 'WordPress\'te Özel Eklenti Geliştirme',
+        meta: '15 Nisan 2023 | WordPress',
+        content: '<p>WordPress için özel eklenti geliştirme sürecimi anlattığım bu yazıda, ACF ve WPForms\'un gücünden nasıl yararlandığımı okuyabilirsiniz. Kurumsal müşterilerim için geliştirdiğim özel rezervasyon ve form sistemleri, işlerini daha verimli hale getirdi.</p><p>Yazıda ayrıca WordPress eklenti geliştirme için gerekli temel bilgiler ve en iyi uygulamalar da yer alıyor. Kendi eklentinizi geliştirmek istiyorsanız, bu rehber size yardımcı olabilir.</p>'
       };
     case '3':
       return {
         title: 'Açık Kaynak Projelere Katkıda Bulunmak',
-        meta: '15 Eylül 2023 | Açık Kaynak',
-        content: '<p>Açık kaynak projelere katkıda bulunmanın hem kişisel gelişim hem de topluluk için ne kadar önemli olduğunu anlatan bir yazı. GitHub üzerinden pull request göndererek başladığım bu yolculuğun kariyer gelişimimdeki etkilerini paylaşıyorum.</p><p>Açık kaynak projeler, kodlama becerilerinizi geliştirmek, yeni insanlarla tanışmak ve sektördeki en iyi uygulamaları öğrenmek için mükemmel bir platformdur. Bu yazıda, başlangıç yapacaklar için ipuçları ve tavsiyeler de bulabilirsiniz.</p>'
+        meta: '20 Mart 2023 | Açık Kaynak',
+        content: '<p>Açık kaynak projelere katkıda bulunmanın hem kişisel gelişim hem de topluluk için ne kadar önemli olduğunu anlatan bu yazıda, GitHub üzerinden pull request göndererek başladığım yolculuğun kariyer gelişimimdeki etkilerini paylaşıyorum.</p><p>Açık kaynak projeler, kodlama becerilerinizi geliştirmek, yeni insanlarla tanışmak ve sektördeki en iyi uygulamaları öğrenmek için mükemmel bir platformdur. Bu yazıda, başlangıç yapacaklar için ipuçları ve tavsiyeler de bulabilirsiniz.</p>'
       };
     default:
       return {
@@ -282,36 +316,38 @@ function getBlogContent(blogId) {
   }
 }
 
-// Proje modalı için içerik yardımcı fonksiyonu
+/**
+ * Proje içeriği için yardımcı fonksiyon
+ */
 function getProjectContent(projectId) {
   switch(projectId) {
     case '1':
       return {
-        title: 'DOF Operasyon Yönetim Portalı',
-        category: 'Web Geliştirme',
-        content: '<p>DOF Manager, DOF ekibinin günlük operasyonlarını yönetmek için geliştirdiğim özel bir web portalı. Bu projede kullanıcı yönetimi, görev takibi ve raporlama özellikleri bulunmaktadır.</p><p>Projede kullanılan teknolojiler: HTML, CSS, JavaScript, PHP ve MySQL. Responsive tasarım ile her cihazda sorunsuz çalışması sağlanmıştır.</p>',
-        links: '<a href="javascript:void(0);" class="btn">Demo</a> <a href="javascript:void(0);" class="btn">GitHub</a>'
+        title: 'DOF Manager',
+        category: 'Açık Kaynak',
+        content: '<p>DOF (Düzeltici Önleyici Faaliyet) takip sistemi için geliştirdiğim açık kaynak bir yönetim aracı. Bu projede React ve PHP kullanarak modern bir arayüz ve güçlü bir backend sağladım.</p><p>SQLite veritabanı entegrasyonu ile yerel olarak çalışabilen, aynı zamanda bulut sistemlere de entegre edilebilen esnek bir yapıya sahip. Kullanıcı dostu arayüzü ve kapsamlı raporlama özellikleri ile öne çıkıyor.</p>',
+        links: '<a href="https://github.com/alikokrtv/dof-manager" target="_blank" class="btn">GitHub Repo</a>'
       };
     case '2':
       return {
-        title: 'E-Ticaret Web Sitesi',
-        category: 'Web Geliştirme',
-        content: '<p>Modern bir e-ticaret platformu için geliştirdiğim özel bir web sitesi. Ödeme sistemi entegrasyonu, ürün yönetimi ve kullanıcı deneyimine özel önem verilmiştir.</p><p>Projede WordPress ve WooCommerce kullanılmış, özel temalar ve eklentilerle benzersiz bir deneyim sunulmuştur. SEO optimizasyonu ve hız iyileştirmeleri ile yüksek performans elde edilmiştir.</p>',
-        links: '<a href="javascript:void(0);" class="btn">Demo</a> <a href="javascript:void(0);" class="btn">Case Study</a>'
+        title: 'Plus Kitchen Intranet Portal',
+        category: 'Kurumsal',
+        content: '<p>Plus Kitchen için geliştirdiğim kurumsal intranet portalı, şirket içi iletişimi ve iş süreçlerini optimize etmek için tasarlandı. WordPress altyapısı üzerine kurulu bu sistem, özel form modülleri ve video eğitimler içeriyor.</p><p>Kullanıcı giriş sistemi ve rol tabanlı yetkilendirme ile hassas bilgilere erişim kontrol altında tutuluyor. Mobil uygulama entegrasyonu sayesinde çalışanlar her yerden portala erişebiliyor.</p>',
+        links: '<a href="javascript:void(0);" class="btn">Demo İste</a>'
       };
     case '3':
       return {
-        title: 'İntranet Portalı',
-        category: 'Web Geliştirme',
-        content: '<p>Büyük bir şirket için geliştirdiğim özel bir intranet portalı. Çalışanların iç iletişimini kolaylaştıran, doküman paylaşımı ve proje yönetimini sağlayan bir sistemdir.</p><p>Laravel framework kullanılarak geliştirilen bu proje, şirket içi verimliliği artırmış ve iletişim süreçlerini hızlandırmıştır. Güvenlik önlemleri ve rol tabanlı erişim sistemi ile hassas verilerin korunması sağlanmıştır.</p>',
-        links: '<a href="javascript:void(0);" class="btn">Demo</a> <a href="javascript:void(0);" class="btn">Detaylar</a>'
+        title: 'TaskFlow - BT İş Akışı Sistemi',
+        category: 'Web Projeler',
+        content: '<p>BT departmanı için geliştirdiğim görev yönetim sistemi, SQLite veritabanı kullanarak hafif ve hızlı bir çözüm sunuyor. Kategori bazlı iş takibi ve süreç yönetimi özellikleri ile iş akışını optimize ediyor.</p><p>Bu projede kullanıcı arayüzü tasarımına özel önem verdim, böylece ekip üyeleri minimum eğitimle sistemi verimli şekilde kullanabiliyorlar. Raporlama ve analiz araçları yöneticilere değerli içgörüler sağlıyor.</p>',
+        links: '<a href="javascript:void(0);" class="btn">Detaylar</a>'
       };
     case '4':
       return {
-        title: 'Mobil Uygulama',
-        category: 'Mobile App',
-        content: '<p>Bir etkinlik organizasyon şirketi için geliştirdiğim mobil uygulama. Etkinlik takibi, bilet satın alma ve katılımcı yönetimi özellikleri bulunmaktadır.</p><p>React Native kullanılarak geliştirilen bu uygulama, hem Android hem de iOS platformlarında sorunsuz çalışmaktadır. Push bildirimler ve harita entegrasyonu ile kullanıcı deneyimi zenginleştirilmiştir.</p>',
-        links: '<a href="javascript:void(0);" class="btn">App Store</a> <a href="javascript:void(0);" class="btn">Google Play</a>'
+        title: 'WordPress Özel Eklentileri',
+        category: 'WordPress',
+        content: '<p>ACF ve WPForms tabanlı geliştirdiğim özel WordPress eklentileri arasında şunlar bulunuyor:</p><ul><li>Giriş yapan kullanıcıya özel hoşgeldin mesajı</li><li>Doğum günü kutlama sistemi</li><li>Toplantı rezervasyon modülü</li><li>REST API destekli booking eklentisi</li></ul><p>Bu eklentiler kurumsal müşterilerim için özel olarak geliştirildi ve iş süreçlerini otomatikleştirerek verimliliklerini artırdı.</p>',
+        links: '<a href="javascript:void(0);" class="btn">İnceleme</a>'
       };
     default:
       return {
