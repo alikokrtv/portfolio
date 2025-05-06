@@ -174,8 +174,9 @@ for (let i = 0; i < navigationLinks.length; i++) {
 }
 
 // Portfolio ve Blog Modal İşlevselliği
+// SİTE YÜKLENDİĞİNDE ÇALIŞACAK
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM yüklendi, modal işlevselliği başlatılıyor...');
+  console.log('Sayfa tam olarak yüklendi, modal işlevselliği başlatılıyor...');
   
   // Blog modalı için gerekli elemanlar
   const blogLinks = document.querySelectorAll('.blog-open');
@@ -190,23 +191,32 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('Blog linkleri:', blogLinks.length);
   console.log('Proje linkleri:', projectLinks.length);
   
+  if (!blogModalContainer) console.log('Blog modal container bulunamadı!');
+  if (!projectModalContainer) console.log('Proje modal container bulunamadı!');
+  
   // Blog link tıklama olayları
   blogLinks.forEach(link => {
+    console.log('Blog link için listener ekleniyor:', link);
     link.addEventListener('click', function(e) {
       e.preventDefault();
+      e.stopPropagation();
       console.log('Blog link tıklandı:', this.getAttribute('data-blog-id'));
       const blogId = this.getAttribute('data-blog-id');
       openBlogModal(blogId);
+      return false;
     });
   });
   
   // Proje link tıklama olayları
   projectLinks.forEach(link => {
+    console.log('Proje link için listener ekleniyor:', link);
     link.addEventListener('click', function(e) {
       e.preventDefault();
+      e.stopPropagation();
       console.log('Proje link tıklandı:', this.getAttribute('data-project-id'));
       const projectId = this.getAttribute('data-project-id');
       openProjectModal(projectId);
+      return false;
     });
   });
   
@@ -215,12 +225,16 @@ document.addEventListener('DOMContentLoaded', function() {
     blogModalClose.addEventListener('click', function() {
       blogModalContainer.style.display = 'none';
     });
+  } else {
+    console.log('Blog modal kapatma butonu bulunamadı!');
   }
   
   if (projectModalClose) {
     projectModalClose.addEventListener('click', function() {
       projectModalContainer.style.display = 'none';
     });
+  } else {
+    console.log('Proje modal kapatma butonu bulunamadı!');
   }
   
   // Dışarıya tıklayınca modalı kapatma

@@ -1945,32 +1945,53 @@
     </div>
   </div>
 
-  <!-- EmailJS Konfigürasyonu -->
-<script type="text/javascript">
-  (function() {
-    emailjs.init('iwzl pleq kiqt sgvn');
-  })();
-  
-  // İletişim formu gönderimi
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Loading durumunu göster
-    document.getElementById('form-result').style.display = 'block';
-    document.getElementById('form-result').innerHTML = '<p>Mesaj gönderiliyor...</p>';
-    
-    // EmailJS ile formu gönder
-    emailjs.sendForm('service_3jxhhgr', 'template_1lq7l2k', this, 'iwzl pleq kiqt sgvn')
-      .then(function() {
-        document.getElementById('form-result').innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
-        document.getElementById('contact-form').reset();
-      })
-      .catch(function(error) {
-        document.getElementById('form-result').innerHTML = '<p style="color: red;">Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>';
-        console.log('EmailJS Error:', error);
-      });
-  });
-</script>
+  <!-- Yeni EmailJS Konfigürasyonu - son sürüm -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    // EmailJS'i sayfanın yüklenmesinden sonra başlat
+    window.onload = function() {
+      console.log('Sayfa tam olarak yüklendi');
+      // EmailJS başlatma
+      emailjs.init("service_3jxhhgr");
+      
+      // Form elemanını bul
+      var contactForm = document.getElementById('contact-form');
+      var formResult = document.getElementById('form-result');
+      
+      if (contactForm) {
+        console.log('İletişim formu bulundu');
+        // Form gönderimi olayını dinle
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          console.log('Form gönderiliyor...');
+          
+          // Loading durumunu göster
+          formResult.style.display = 'block';
+          formResult.innerHTML = '<p>Mesaj gönderiliyor...</p>';
+          
+          // Form verilerini hazırla
+          var templateParams = {
+            from_name: this.querySelector('[name="from_name"]').value,
+            reply_to: this.querySelector('[name="reply_to"]').value,
+            message: this.querySelector('[name="message"]').value
+          };
+          
+          // EmailJS ile gönder
+          emailjs.send('service_3jxhhgr', 'template_1lq7l2k', templateParams, 'iwzl pleq kiqt sgvn')
+            .then(function(response) {
+              console.log('SUCCESS!', response.status, response.text);
+              formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
+              contactForm.reset();
+            }, function(error) {
+              console.log('FAILED...', error);
+              formResult.innerHTML = '<p style="color: red;">Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>';
+            });
+        });
+      } else {
+        console.log('İletişim formu bulunamadı');
+      }
+    };
+  </script>
   
   <!-- custom js link -->
   <script src="./assets/js/script.js"></script>
