@@ -1936,7 +1936,8 @@
 
   <!-- Language switching script -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    // Sayfa yüklendiğinde çalışacak fonksiyon
+    window.addEventListener('load', function() {
       const languageToggle = document.getElementById('language-toggle');
       
       languageToggle.addEventListener('click', function() {
@@ -1951,7 +1952,7 @@
       });
       
       // EmailJS Configuration
-      emailjs.init("user_YOUR_USER_ID");
+      emailjs.init("iwzl pleq kiqt sgvn");
       
       const contactForm = document.getElementById('contact-form');
       const formResult = document.getElementById('form-result');
@@ -1965,7 +1966,7 @@
           formResult.innerHTML = '<p>Mesaj gönderiliyor...</p>';
           
           // Send the email using EmailJS
-          emailjs.sendForm('service_default', 'template_default', this, 'iwzl pleq kiqt sgvn')
+          emailjs.sendForm('service_3jxhhgr', 'template_1lq7l2k', this, 'iwzl pleq kiqt sgvn')
             .then(function() {
               formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
               contactForm.reset();
