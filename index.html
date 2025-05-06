@@ -1887,25 +1887,57 @@
 
           <h3 class="h3 form-title">İletişim Formu</h3>
 
-          <form id="contact-form" class="form" data-form>
+          <form action="#" class="form" id="contact-form" data-form>
 
             <div class="input-wrapper">
-              <input type="text" name="from_name" class="form-input" placeholder="İsim Ve Soyisim" required data-form-input>
+              <input type="text" name="from_name" class="form-input" placeholder="Full name" required data-form-input>
 
-              <input type="email" name="reply_to" class="form-input" placeholder="Email Adresiniz" required data-form-input>
+              <input type="email" name="reply_to" class="form-input" placeholder="Email address" required data-form-input>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Mesajınız" required data-form-input></textarea>
+            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
 
-            <button class="form-btn" type="submit" data-form-btn>
+            <div id="form-result" style="margin-bottom: 15px;"></div>
+
+            <button class="form-btn" type="submit" disabled data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
-              <span class="tr">Mesaj Gönder</span>
-              <span class="en">Send Message</span>
+              <span>Send Message</span>
             </button>
-            
-            <div id="form-result" style="margin-top: 20px; text-align: center; display: none;"></div>
 
           </form>
+          
+          <!-- Form için özel script -->
+          <script>
+            // Form yüklendiğinde çalış
+            document.addEventListener('DOMContentLoaded', function() {
+              var contactForm = document.getElementById('contact-form');
+              var formResult = document.getElementById('form-result');
+              
+              if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  
+                  formResult.style.display = 'block';
+                  formResult.innerHTML = '<p>Mesaj gönderiliyor...</p>';
+                  
+                  // EmailJS ile formu gönder
+                  emailjs.send('service_3jxhhgr', 'template_1lq7l2k', {
+                    from_name: this.querySelector('[name="from_name"]').value,
+                    reply_to: this.querySelector('[name="reply_to"]').value,
+                    message: this.querySelector('[name="message"]').value
+                  }, 'iwzl pleq kiqt sgvn')
+                  .then(function() {
+                    formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
+                    contactForm.reset();
+                  })
+                  .catch(function(error) {
+                    formResult.innerHTML = '<p style="color: red;">Mesaj gönderilirken hata oluştu: ' + error.message + '</p>';
+                    console.error('EmailJS Error:', error);
+                  });
+                });
+              }
+            });
+          </script>
 
         </section>
 

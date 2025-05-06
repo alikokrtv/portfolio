@@ -173,170 +173,184 @@ for (let i = 0; i < navigationLinks.length; i++) {
   });
 }
 
-// Portfolio ve Blog Modal İşlevselliği
-// SİTE YÜKLENDİĞİNDE ÇALIŞACAK
+// Sayfa yüklendiğinde çalışacak kodlar
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('Sayfa tam olarak yüklendi, modal işlevselliği başlatılıyor...');
+  // Tüm portfolyo modal butonlarını bul
+  var projectButtons = document.querySelectorAll('.project-open');
   
-  // Blog modalı için gerekli elemanlar
-  const blogLinks = document.querySelectorAll('.blog-open');
-  const blogModalContainer = document.getElementById('blog-modal-container');
-  const blogModalClose = document.querySelector('#blog-modal-container .blog-modal-close');
-  
-  // Proje modalı için gerekli elemanlar
-  const projectLinks = document.querySelectorAll('.project-open');
-  const projectModalContainer = document.getElementById('project-modal-container');
-  const projectModalClose = document.querySelector('#project-modal-container .project-modal-close');
-  
-  console.log('Blog linkleri:', blogLinks.length);
-  console.log('Proje linkleri:', projectLinks.length);
-  
-  if (!blogModalContainer) console.log('Blog modal container bulunamadı!');
-  if (!projectModalContainer) console.log('Proje modal container bulunamadı!');
-  
-  // Blog link tıklama olayları
-  blogLinks.forEach(link => {
-    console.log('Blog link için listener ekleniyor:', link);
-    link.addEventListener('click', function(e) {
+  // Her buton için olay dinleyicisi ekle
+  for (var i = 0; i < projectButtons.length; i++) {
+    projectButtons[i].onclick = function(e) {
       e.preventDefault();
-      e.stopPropagation();
-      console.log('Blog link tıklandı:', this.getAttribute('data-blog-id'));
-      const blogId = this.getAttribute('data-blog-id');
-      openBlogModal(blogId);
-      return false;
-    });
-  });
-  
-  // Proje link tıklama olayları
-  projectLinks.forEach(link => {
-    console.log('Proje link için listener ekleniyor:', link);
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('Proje link tıklandı:', this.getAttribute('data-project-id'));
-      const projectId = this.getAttribute('data-project-id');
-      openProjectModal(projectId);
-      return false;
-    });
-  });
-  
-  // Modal kapatma olayları
-  if (blogModalClose) {
-    blogModalClose.addEventListener('click', function() {
-      blogModalContainer.style.display = 'none';
-    });
-  } else {
-    console.log('Blog modal kapatma butonu bulunamadı!');
+      
+      var projectId = this.getAttribute('data-project-id');
+      console.log('Proje butonuna tıklandı:', projectId);
+      
+      // Modal bilgilerini oluştur
+      var title, content, category;
+      
+      switch(projectId) {
+        case '1':
+          title = 'DOF Manager';
+          category = 'Web Geliştirme';
+          content = 'DOF Manager projesi detayları';
+          break;
+        case '2':
+          title = 'E-Ticaret Sitesi';
+          category = 'Web Geliştirme';
+          content = 'E-Ticaret Sitesi projesi detayları';
+          break;
+        case '3':
+          title = 'İntranet Portalı';
+          category = 'Web Geliştirme';
+          content = 'İntranet Portalı projesi detayları';
+          break;
+        default:
+          title = 'Proje';
+          category = 'Web Geliştirme';
+          content = 'Proje detayları';
+      }
+      
+      // Modal içeriğini ayarla
+      document.getElementById('project-modal-title').innerText = title;
+      document.getElementById('project-modal-category').innerText = category;
+      document.getElementById('project-modal-content').innerHTML = '<p>' + content + '</p>';
+      
+      // Modalı göster
+      document.getElementById('project-modal-container').style.display = 'block';
+    };
   }
   
-  if (projectModalClose) {
-    projectModalClose.addEventListener('click', function() {
-      projectModalContainer.style.display = 'none';
-    });
-  } else {
-    console.log('Proje modal kapatma butonu bulunamadı!');
+  // Tüm blog modal butonlarını bul
+  var blogButtons = document.querySelectorAll('.blog-open');
+  
+  // Her buton için olay dinleyicisi ekle
+  for (var i = 0; i < blogButtons.length; i++) {
+    blogButtons[i].onclick = function(e) {
+      e.preventDefault();
+      
+      var blogId = this.getAttribute('data-blog-id');
+      console.log('Blog butonuna tıklandı:', blogId);
+      
+      // Modal bilgilerini oluştur
+      var title, meta, content;
+      
+      switch(blogId) {
+        case '1':
+          title = 'Web Geliştirme Yolculuğum';
+          meta = '12 Nisan 2023 | Web Geliştirme';
+          content = 'Web geliştirme yolculuğum hakkında detaylar';
+          break;
+        case '2':
+          title = 'WordPress Eklenti Geliştirme';
+          meta = '28 Haziran 2023 | WordPress';
+          content = 'WordPress eklenti geliştirme deneyimlerim';
+          break;
+        case '3':
+          title = 'Açık Kaynak Projelere Katkıda Bulunmanın Önemi';
+          meta = '15 Eylül 2023 | Açık Kaynak';
+          content = 'Açık kaynak projeler hakkında düşüncelerim';
+          break;
+        default:
+          title = 'Blog Yazısı';
+          meta = 'Tarih | Kategori';
+          content = 'Blog yazısı içeriği';
+      }
+      
+      // Modal içeriğini ayarla
+      document.getElementById('blog-modal-title').innerText = title;
+      document.getElementById('blog-modal-meta').innerText = meta;
+      document.getElementById('blog-modal-content').innerHTML = '<p>' + content + '</p>';
+      
+      // Modalı göster
+      document.getElementById('blog-modal-container').style.display = 'block';
+    };
   }
   
-  // Dışarıya tıklayınca modalı kapatma
-  window.addEventListener('click', function(e) {
-    if (e.target === blogModalContainer) {
-      blogModalContainer.style.display = 'none';
+  // Modal kapatma butonlarını bul
+  var closeButtons = document.querySelectorAll('.blog-modal-close, .project-modal-close');
+  
+  // Kapatma butonlarına olay dinleyicisi ekle
+  for (var i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].onclick = function() {
+      this.parentNode.parentNode.style.display = 'none';
+    };
+  }
+  
+  // Modal dışına tıklandığında kapat
+  window.onclick = function(e) {
+    if (e.target.className === 'modal-container') {
+      e.target.style.display = 'none';
     }
-    if (e.target === projectModalContainer) {
-      projectModalContainer.style.display = 'none';
-    }
-  });
+  };
 
-  // Modal açma fonksiyonları
-  window.openBlogModal = function(blogId) {
-    console.log('openBlogModal çağrıldı, ID:', blogId);
-    const blogModalTitle = document.getElementById('blog-modal-title');
-    const blogModalMeta = document.getElementById('blog-modal-meta');
-    const blogModalContent = document.getElementById('blog-modal-content');
-    
-    // Blog içeriğini ID'ye göre ayarla
-    let title = '', meta = '', content = '';
-    
+  // Blog ve Proje modalları için daha detaylı içerikler
+  function getBlogContent(blogId) {
     switch(blogId) {
       case '1':
-        title = 'Web Geliştirme Yolculuğum';
-        meta = '12 Nisan 2023 | Web Geliştirme';
-        content = '<p>Web geliştirme yolculuğuma nasıl başladığımı ve bugünlere nasıl geldiğimi anlatan bir yazı.</p>';
-        break;
+        return {
+          title: 'Web Geliştirme Yolculuğum',
+          meta: '12 Nisan 2023 | Web Geliştirme',
+          content: '<p>Web geliştirme yolculuğuma nasıl başladığımı ve bugünlere nasıl geldiğimi anlatan bir yazı. Front-end ve back-end teknolojileri öğrenerek başladığım bu yolculukta, öğrendiğim en önemli şey sürekli kendini geliştirmenin önemi oldu.</p>'
+        };
       case '2':
-        title = 'WordPress Eklenti Geliştirme';
-        meta = '28 Haziran 2023 | WordPress';
-        content = '<p>WordPress için özel eklentiler geliştirmeye nasıl başladığımı ve bu süreçte karşılaştığım zorlukları anlatıyorum.</p>';
-        break;
+        return {
+          title: 'WordPress Eklenti Geliştirme',
+          meta: '28 Haziran 2023 | WordPress',
+          content: '<p>WordPress için özel eklentiler geliştirmeye nasıl başladığımı ve bu süreçte karşılaştığım zorlukları anlatıyorum. WordPress ekosistemi içinde çalışmak, özellikle PHP bilgimi geliştirmeme yardımcı oldu.</p>'
+        };
       case '3':
-        title = 'Açık Kaynak Projelere Katkıda Bulunmanın Önemi';
-        meta = '15 Eylül 2023 | Açık Kaynak';
-        content = '<p>Açık kaynak projelere katkıda bulunmanın hem kişisel gelişim hem de topluluk için ne kadar önemli olduğunu anlatan bir yazı.</p>';
-        break;
+        return {
+          title: 'Açık Kaynak Projelere Katkıda Bulunmak',
+          meta: '15 Eylül 2023 | Açık Kaynak',
+          content: '<p>Açık kaynak projelere katkıda bulunmanın hem kişisel gelişim hem de topluluk için ne kadar önemli olduğunu anlatan bir yazı. GitHub üzerinden pull request göndererek başladığım bu yolculuğun kariyer gelişimimdeki etkilerini paylaşıyorum.</p>'
+        };
       default:
-        title = 'Blog Yazısı';
-        meta = 'Tarih | Kategori';
-        content = '<p>Bu blog yazısının içeriği henüz eklenmemiş.</p>';
+        return {
+          title: 'Blog Yazısı',
+          meta: 'Tarih | Kategori',
+          content: '<p>Bu blog yazısının içeriği henüz eklenmemiş.</p>'
+        };
     }
-    
-    // Modal içeriğini ayarla
-    blogModalTitle.innerHTML = title;
-    blogModalMeta.innerHTML = meta;
-    blogModalContent.innerHTML = content;
-    
-    // Modalı göster
-    blogModalContainer.style.display = 'block';
-  };
-
-  window.openProjectModal = function(projectId) {
-    console.log('openProjectModal çağrıldı, ID:', projectId);
-    const projectModalTitle = document.getElementById('project-modal-title');
-    const projectModalCategory = document.getElementById('project-modal-category');
-    const projectModalContent = document.getElementById('project-modal-content');
-    const projectModalLinks = document.getElementById('project-modal-links');
-    
-    // Proje içeriğini ID'ye göre ayarla
-    let title = '', category = '', content = '', links = '';
-    
+  }
+  
+  function getProjectContent(projectId) {
     switch(projectId) {
       case '1':
-        title = 'DOF Operasyon Yönetim Portalı';
-        category = 'Web Geliştirme';
-        content = '<p>DOF Manager, DOF ekibinin günlük operasyonlarını yönetmek için geliştirdiğim özel bir web portalı.</p>';
-        links = '<a href="#" class="btn">Demo</a>';
-        break;
+        return {
+          title: 'DOF Operasyon Yönetim Portalı',
+          category: 'Web Geliştirme',
+          content: '<p>DOF Manager, DOF ekibinin günlük operasyonlarını yönetmek için geliştirdiğim özel bir web portalı. Bu projede kullanıcı yönetimi, görev takibi ve raporlama özellikleri bulunmaktadır.</p>',
+          links: '<a href="#" class="btn">Demo</a>'
+        };
       case '2':
-        title = 'E-Ticaret Web Sitesi';
-        category = 'Web Geliştirme';
-        content = '<p>Modern bir e-ticaret platformu için geliştirdiğim özel bir web sitesi.</p>';
-        links = '<a href="#" class="btn">Demo</a>';
-        break;
+        return {
+          title: 'E-Ticaret Web Sitesi',
+          category: 'Web Geliştirme',
+          content: '<p>Modern bir e-ticaret platformu için geliştirdiğim özel bir web sitesi. Ödeme sistemi entegrasyonu, ürün yönetimi ve kullanıcı deneyimine özel önem verilmiştir.</p>',
+          links: '<a href="#" class="btn">Demo</a>'
+        };
       case '3':
-        title = 'İntranet Portalı';
-        category = 'Web Geliştirme';
-        content = '<p>Büyük bir şirket için geliştirdiğim özel bir intranet portalı.</p>';
-        links = '<a href="#" class="btn">Demo</a>';
-        break;
+        return {
+          title: 'İntranet Portalı',
+          category: 'Web Geliştirme',
+          content: '<p>Büyük bir şirket için geliştirdiğim özel bir intranet portalı. Çalışanların iç iletişimini kolaylaştıran, doküman paylaşımı ve proje yönetimini sağlayan bir sistemdir.</p>',
+          links: '<a href="#" class="btn">Demo</a>'
+        };
       case '4':
-        title = 'Mobil Uygulama';
-        category = 'Mobile App';
-        content = '<p>Bir etkinlik organizasyon şirketi için geliştirdiğim mobil uygulama.</p>';
-        links = '<a href="#" class="btn">Demo</a>';
-        break;
+        return {
+          title: 'Mobil Uygulama',
+          category: 'Mobile App',
+          content: '<p>Bir etkinlik organizasyon şirketi için geliştirdiğim mobil uygulama. Etkinlik takibi, bilet satın alma ve katılımcı yönetimi özellikleri bulunmaktadır.</p>',
+          links: '<a href="#" class="btn">Demo</a>'
+        };
       default:
-        title = 'Proje';
-        category = 'Kategori';
-        content = '<p>Bu projenin içeriği henüz eklenmemiş.</p>';
-        links = '';
+        return {
+          title: 'Proje',
+          category: 'Kategori',
+          content: '<p>Bu projenin içeriği henüz eklenmemiş.</p>',
+          links: ''
+        };
     }
-    
-    // Modal içeriğini ayarla
-    projectModalTitle.innerHTML = title;
-    projectModalCategory.innerHTML = category;
-    projectModalContent.innerHTML = content;
-    projectModalLinks.innerHTML = links;
-    
-    // Modalı göster
-    projectModalContainer.style.display = 'block';
-  };
+  }
 });
