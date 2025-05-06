@@ -334,6 +334,15 @@ main {
 .avatar-box {
   background: var(--bg-gradient-onyx);
   border-radius: 20px;
+  height: 150px;
+  top: 2;
+}
+.avatar-box img  {
+  width: 100px;
+  object-fit: cover;
+  border-radius: 20px;
+  scale: 1.1;
+  
 }
 
 .info-content .name {
@@ -1840,6 +1849,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   .info-content .name {
     white-space: nowrap;
     text-align: center;
+    margin-top: 30px;
   }
 
   .info-content .title { margin: auto; }

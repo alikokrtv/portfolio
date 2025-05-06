@@ -143,17 +143,32 @@ const pages = document.querySelectorAll("[data-page]");
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
+    // Get the original dataset value
+    let pageType = "";
+    
+    // Match the index of the navigation link to the corresponding page
+    if (i === 0) pageType = "about";
+    else if (i === 1) pageType = "resume";
+    else if (i === 2) pageType = "portfolio";
+    else if (i === 3) pageType = "blog";
+    else if (i === 4) pageType = "contact";
+    
+    for (let j = 0; j < pages.length; j++) {
+      if (pages[j].dataset.page === pageType) {
+        pages[j].classList.add("active");
         window.scrollTo(0, 0);
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        pages[j].classList.remove("active");
       }
     }
-
+    
+    // Update active state for navigation links
+    for (let k = 0; k < navigationLinks.length; k++) {
+      if (k === i) {
+        navigationLinks[k].classList.add("active");
+      } else {
+        navigationLinks[k].classList.remove("active");
+      }
+    }
   });
 }

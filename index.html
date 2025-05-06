@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vCard - Personal Portfolio</title>
+  <title>Ali Kök - Kişisel Portfolyo</title>
 
   <!--
     - favicon
@@ -23,9 +23,97 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    .language-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--bg-gradient-onyx);
+      color: var(--orange-yellow-crayola);
+      border: 2px solid var(--orange-yellow-crayola);
+      padding: 5px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 100;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .en {
+      display: none;
+    }
+    
+    html[lang="en"] .en {
+      display: block;
+    }
+    
+    html[lang="en"] .tr {
+      display: none;
+    }
+    
+    /* Modal styles */
+    .modal-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    
+    .blog-modal, .project-modal {
+      background: var(--bg-gradient-onyx);
+      color: var(--light-gray);
+      padding: 30px;
+      border-radius: 14px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      border: 1px solid var(--jet);
+      box-shadow: var(--shadow-2);
+    }
+    
+    .blog-modal-close, .project-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--orange-yellow-crayola);
+    }
+    
+    .project-modal img, .blog-modal img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+    
+    #project-modal-links a, #blog-modal-links a {
+      display: inline-block;
+      margin: 10px 10px 0 0;
+      padding: 8px 16px;
+      background: var(--orange-yellow-crayola);
+      color: var(--smoky-black);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
 </head>
 
 <body>
+
+  <button class="language-toggle" id="language-toggle">English</button>
 
   <!--
     - #MAIN
@@ -42,17 +130,18 @@
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Richard hanrick" width="80">
+          <img src="./assets/images/avatars.jpg" alt="Ali Kök" width="80">
         </figure>
 
         <div class="info-content">
-          <h1 class="name" title="Richard hanrick">Richard hanrick</h1>
+          <h1 class="name" title="Ali Kök">Ali KÖK</h1>
 
-          <p class="title">Web developer</p>
+          <p class="title tr">Yazılım Geliştirme Uzmanı</p>
+          <p class="title en">Software Development Specialist</p>
         </div>
 
         <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
+          <span>İletişim</span>
 
           <ion-icon name="chevron-down"></ion-icon>
         </button>
@@ -72,9 +161,10 @@
             </div>
 
             <div class="contact-info">
-              <p class="contact-title">Email</p>
+              <p class="contact-title tr">E-posta</p>
+              <p class="contact-title en">Email</p>
 
-              <a href="mailto:richard@example.com" class="contact-link">richard@example.com</a>
+              <a href="mailto:alikokrtv@gmail.com" class="contact-link">alikokrtv@gmail.com</a>
             </div>
 
           </li>
@@ -86,9 +176,10 @@
             </div>
 
             <div class="contact-info">
-              <p class="contact-title">Phone</p>
+              <p class="contact-title tr">Telefon</p>
+              <p class="contact-title en">Phone</p>
 
-              <a href="tel:+12133522795" class="contact-link">+1 (213) 352-2795</a>
+              <a href="tel:+905417759351" class="contact-link">+90 (541) 775-9351</a>
             </div>
 
           </li>
@@ -100,9 +191,10 @@
             </div>
 
             <div class="contact-info">
-              <p class="contact-title">Birthday</p>
+              <p class="contact-title tr">Doğum Günü</p>
+              <p class="contact-title en">Birthday</p>
 
-              <time datetime="1982-06-23">June 23, 1982</time>
+              <time datetime="1995-09-09">Eylül 09, 1995</time>
             </div>
 
           </li>
@@ -114,9 +206,10 @@
             </div>
 
             <div class="contact-info">
-              <p class="contact-title">Location</p>
+              <p class="contact-title tr">Konum</p>
+              <p class="contact-title en">Location</p>
 
-              <address>Sacramento, California, USA</address>
+              <address>İstanbul, Türkiye</address>
             </div>
 
           </li>
@@ -128,14 +221,14 @@
         <ul class="social-list">
 
           <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
+            <a href="https://github.com/alikokrtv" class="social-link" target="_blank">
+              <ion-icon name="logo-github"></ion-icon>
             </a>
           </li>
 
           <li class="social-item">
             <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
+              <ion-icon name="logo-linkedin"></ion-icon>
             </a>
           </li>
 
@@ -170,23 +263,38 @@
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
+            <button class="navbar-link active" data-nav-link>
+              <span class="tr">Hakkımda</span>
+              <span class="en">About</span>
+            </button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
+            <button class="navbar-link" data-nav-link>
+              <span class="tr">Özgeçmiş</span>
+              <span class="en">Resume</span>
+            </button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
+            <button class="navbar-link" data-nav-link>
+              <span class="tr">Portfolio</span>
+              <span class="en">Portfolio</span>
+            </button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Blog</button>
+            <button class="navbar-link" data-nav-link>
+              <span class="tr">Blog</span>
+              <span class="en">Blog</span>
+            </button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
+            <button class="navbar-link" data-nav-link>
+              <span class="tr">İletişim</span>
+              <span class="en">Contact</span>
+            </button>
           </li>
 
         </ul>
@@ -204,22 +312,41 @@
       <article class="about  active" data-page="about">
 
         <header>
-          <h2 class="h2 article-title">About me</h2>
+          <h2 class="h2 article-title tr">Hakkımda</h2>
+          <h2 class="h2 article-title en">About Me</h2>
         </header>
 
-        <section class="about-text">
+        <section class="about-text tr">
           <p>
-            I'm Creative Director and UI/UX Designer from Sydney, Australia, working in web development and print media.
-            I enjoy
-            turning complex problems into simple, beautiful and intuitive designs.
+            Merhaba! Ben Ali Kök, İstanbul'da yaşayan, yazılım geliştirme ve tasarım alanlarında çok yönlü işler yapan bir profesyonelim. Kendimi "sorun çözücü" olarak tanımlıyorum çünkü karşılaştığım her teknik problemi bir öğrenme fırsatına dönüştürmek benim için hem heyecan verici hem geliştirici oluyor.
           </p>
 
           <p>
-            My job is to build your website so that it is functional and user-friendly but at the same time attractive.
-            Moreover, I
-            add personal touch to your product and make sure that is eye-catching and easy to use. My aim is to bring
-            across your
-            message and identity in the most creative way. I created web design for many famous brand companies.
+            Yazılımla tanıştıktan sonra, grafik tasarım ve video kurgu gibi kreatif işlerimi teknik bilgiyle birleştirerek daha güçlü projeler üretmeye başladım. Şu ana kadar birçok farklı alanda çalıştım: portal sistemleri, mobil uygulama yönetimi, web siteleri, WordPress eklentileri, API entegrasyonları, e-ticaret yönetimi, tasarım, hatta video montaj ve şube içi ekran sistemleri.
+          </p>
+          
+          <p>
+            Şu anda IT departmanında yazılım geliştirme uzmanı olarak görev alıyorum. Daha önce kreatif ekipte tasarımcı olarak başladığım bu yolculukta, hem teknik hem de görsel alanda edindiğim deneyimlerle kapsamlı çözümler sunabiliyorum.
+          </p>
+          
+          <p>
+            Gelecekteki hedefim, edindiğim bilgi ve deneyimleri kendi projelerime aktarmak, insanlara fayda sağlayacak ürünler geliştirmek ve bu yolda kendimi sürekli yenileyerek ilerlemek. Öğrenmeye aç biriyim; yeni teknolojiler, yaratıcı fikirler ve çözüm odaklı yaklaşımlar beni her zaman motive ediyor.
+          </p>
+        </section>
+        
+        <section class="about-text tr">
+          <p>
+            Yazılım geliştirmeye tutkuyla bağlı, yaratıcı projeler üretmeye odaklı bir geliştiriciyim. Hem teknik altyapı hem de görsel tasarım alanlarında tecrübeliyim. İstanbul'da yaşıyorum, öğrenmeye ve gelişmeye aç biriyim. Zengin içerikli projeler geliştirip topluma fayda sağlamak ve kendi girişimlerimle değer yaratmak istiyorum.
+          </p>
+
+          <p>
+            After being introduced to programming, I began combining my creative skills like graphic design and video editing with technical knowledge to produce more powerful projects. I've worked in many different areas: portal systems, mobile app management, websites, WordPress plugins, API integrations, e-commerce management, design, and even video editing and in-store display systems.
+          </p>
+        </section>
+        
+        <section class="about-text en">
+          <p>
+            I am a developer passionate about software development and focused on creating innovative projects. I am experienced in both technical infrastructure and visual design. Living in Istanbul, I am eager to learn and develop. I aim to develop rich content projects that benefit society and create value with my own ventures.
           </p>
         </section>
 
@@ -230,7 +357,8 @@
 
         <section class="service">
 
-          <h3 class="h3 service-title">What i'm doing</h3>
+          <h3 class="h3 service-title tr">Neler Yapıyorum?</h3>
+          <h3 class="h3 service-title en">What I Do</h3>
 
           <ul class="service-list">
 
@@ -242,10 +370,14 @@
               </div>
 
               <div class="service-content-box">
-                <h4 class="h4 service-item-title">Web design</h4>
+                <h4 class="h4 service-item-title tr">Web Tasarım ve Geliştirme</h4>
+                <h4 class="h4 service-item-title en">Web Design & Development</h4>
 
-                <p class="service-item-text">
-                  The most modern and high-quality design made at a professional level.
+                <p class="service-item-text tr">
+                  Web siteleri, portal ve intranet sistemleri, e-ticaret, mobil uygulama entegrasyonları gibi farklı alanlarda full-stack geliştirme yapıyorum. Özellikle WordPress, React, PHP ve JavaScript kullanıyorum.
+                </p>
+                <p class="service-item-text en">
+                  I develop full-stack solutions in various areas such as websites, portal and intranet systems, e-commerce, and mobile app integrations. I primarily use WordPress, React, PHP, and JavaScript.
                 </p>
               </div>
 
@@ -258,10 +390,14 @@
               </div>
 
               <div class="service-content-box">
-                <h4 class="h4 service-item-title">Web development</h4>
+                <h4 class="h4 service-item-title tr">WordPress & API Entegrasyonları</h4>
+                <h4 class="h4 service-item-title en">WordPress & API Integrations</h4>
 
-                <p class="service-item-text">
-                  High-quality development of sites at the professional level.
+                <p class="service-item-text tr">
+                  WordPress siteleri ve özel eklentiler geliştiriyorum. Logo API, REST API gibi çeşitli API entegrasyonları ve SQLite ile iş akış sistemleri kuruyorum.
+                </p>
+                <p class="service-item-text en">
+                  I develop WordPress sites and custom plugins. I also implement various API integrations like Logo API, REST API, and build workflow systems with SQLite.
                 </p>
               </div>
 
@@ -274,10 +410,14 @@
               </div>
 
               <div class="service-content-box">
-                <h4 class="h4 service-item-title">Mobile apps</h4>
+                <h4 class="h4 service-item-title tr">Video Kurgu & Produksiyon</h4>
+                <h4 class="h4 service-item-title en">Video Editing & Production</h4>
 
-                <p class="service-item-text">
-                  Professional development of applications for iOS and Android.
+                <p class="service-item-text tr">
+                  After Effects ve Premiere Pro kullanarak eğitim videoları, tanıtım filmleri ve sosyal medya içerikleri hazırlıyorum. Şube açılışları ve özel etkinlikler için video produksiyonu yapıyorum.
+                </p>
+                <p class="service-item-text en">
+                  I create training videos, promotional films, and social media content using After Effects and Premiere Pro. I also handle video production for store openings and special events.
                 </p>
               </div>
 
@@ -290,10 +430,14 @@
               </div>
 
               <div class="service-content-box">
-                <h4 class="h4 service-item-title">Photography</h4>
+                <h4 class="h4 service-item-title tr">Grafik Tasarım</h4>
+                <h4 class="h4 service-item-title en">Graphic Design</h4>
 
-                <p class="service-item-text">
-                  I make high-quality photos of any category at a professional level.
+                <p class="service-item-text tr">
+                  Adobe ürünleriyle afiş, katalog, baskı tasarımları ve kurumsal kimlik çalışmaları yapıyorum. Sosyal medya görselleri ve dijital pazarlama materyalleri hazırlıyorum.
+                </p>
+                <p class="service-item-text en">
+                  I create posters, catalogs, print designs, and corporate identity materials with Adobe products. I also prepare social media visuals and digital marketing materials.
                 </p>
               </div>
 
@@ -310,7 +454,7 @@
 
         <section class="testimonials">
 
-          <h3 class="h3 testimonials-title">Testimonials</h3>
+          <h3 class="h3 testimonials-title">Referanslar</h3>
 
           <ul class="testimonials-list has-scrollbar">
 
@@ -532,41 +676,36 @@
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">University school of the arts</h4>
+              <h4 class="h4 timeline-item-title">Özünder Bilgisayar Akademisi</h4>
 
-              <span>2007 — 2008</span>
+              <span>2019 — 2020</span>
 
               <p class="timeline-text">
-                Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et
-                quas molestias
-                exceptur.
+                Web tasarım ve programlama kursları eğitimi aldım. HTML, CSS, JavaScript, PHP ve WordPress altyapısı üzerine yoğunlaşan çalışmalar yaptım.
               </p>
 
             </li>
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">New york academy of art</h4>
+              <h4 class="h4 timeline-item-title">Udemy & Online Platformlar</h4>
 
-              <span>2006 — 2007</span>
+              <span>2018 — Devam Ediyor</span>
 
               <p class="timeline-text">
-                Ratione voluptatem sequi nesciunt, facere quisquams facere menda ossimus, omnis voluptas assumenda est
-                omnis..
+                Web geliştirme, React, PHP ve Laravel konularında sürekli kendimi geliştirmek için çeşitli online kurslara katılıyorum.
               </p>
 
             </li>
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">High school of art and design</h4>
+              <h4 class="h4 timeline-item-title">Açıköğretim Lisesi</h4>
 
-              <span>2002 — 2004</span>
+              <span>2010 — 2013</span>
 
               <p class="timeline-text">
-                Duis aute irure dolor in reprehenderit in voluptate, quila voluptas mag odit aut fugit, sed consequuntur
-                magni dolores
-                eos.
+                Lise eğitimimi tamamladım.
               </p>
 
             </li>
@@ -589,42 +728,36 @@
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">Creative director</h4>
+              <h4 class="h4 timeline-item-title">Web Developer / Yazılım Geliştirme Uzmanı</h4>
 
-              <span>2015 — Present</span>
+              <span>2023 — Devam Ediyor</span>
 
               <p class="timeline-text">
-                Nemo enim ipsam voluptatem blanditiis praesentium voluptum delenit atque corrupti, quos dolores et qvuas
-                molestias
-                exceptur.
+                Plus Kitchen bünyesinde portal projeleri geliştirme, mobil uygulama yönetimi, Logo API araştırmaları ve raporlama, ürün geçiş sistemleri ve Simpra ile entegrasyon çalışmaları yapıyorum. Bilgi işlem departmanı ile yazılım süreçlerinde aktif rol alıyorum.
               </p>
 
             </li>
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">Art director</h4>
+              <h4 class="h4 timeline-item-title">Sosyal Medya Uzmanı - Kreatif Departman</h4>
 
-              <span>2013 — 2015</span>
+              <span>2021 — 2023</span>
 
               <p class="timeline-text">
-                Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et
-                quas molestias
-                exceptur.
+                Plus Kitchen'da kreatif projelerde sosyal medya içerikleri oluşturma, video, kurgu, baskı tasarım destekleri sağlama görevlerini üstlendim.
               </p>
 
             </li>
 
             <li class="timeline-item">
 
-              <h4 class="h4 timeline-item-title">Web designer</h4>
+              <h4 class="h4 timeline-item-title">Webmaster & Sosyal Medya Uzmanı</h4>
 
-              <span>2010 — 2013</span>
+              <span>2018 — 2021</span>
 
               <p class="timeline-text">
-                Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et
-                quas molestias
-                exceptur.
+                Karahisar Medya & Sayın Medya bünyesinde web siteleri geliştirme, sosyal medya yönetimi ve grafik tasarım çalışmaları yürüttüm.
               </p>
 
             </li>
@@ -642,12 +775,12 @@
             <li class="skills-item">
 
               <div class="title-wrapper">
-                <h5 class="h5">Web design</h5>
-                <data value="80">80%</data>
+                <h5 class="h5">Frontend Development</h5>
+                <data value="85">85%</data>
               </div>
 
               <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
+                <div class="skill-progress-fill" style="width: 85%;"></div>
               </div>
 
             </li>
@@ -655,12 +788,12 @@
             <li class="skills-item">
 
               <div class="title-wrapper">
-                <h5 class="h5">Graphic design</h5>
-                <data value="70">70%</data>
+                <h5 class="h5">Backend Development</h5>
+                <data value="75">75%</data>
               </div>
 
               <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
+                <div class="skill-progress-fill" style="width: 75%;"></div>
               </div>
 
             </li>
@@ -668,7 +801,7 @@
             <li class="skills-item">
 
               <div class="title-wrapper">
-                <h5 class="h5">Branding</h5>
+                <h5 class="h5">WordPress & CMS</h5>
                 <data value="90">90%</data>
               </div>
 
@@ -681,12 +814,12 @@
             <li class="skills-item">
 
               <div class="title-wrapper">
-                <h5 class="h5">WordPress</h5>
-                <data value="50">50%</data>
+                <h5 class="h5">UI/UX & Media Design</h5>
+                <data value="80">80%</data>
               </div>
 
               <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 50%;"></div>
+                <div class="skill-progress-fill" style="width: 80%;"></div>
               </div>
 
             </li>
@@ -716,19 +849,23 @@
           <ul class="filter-list">
 
             <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
+              <button class="active" data-filter-btn>Tümü</button>
             </li>
 
             <li class="filter-item">
-              <button data-filter-btn>Web design</button>
+              <button data-filter-btn>Web Projeler</button>
             </li>
 
             <li class="filter-item">
-              <button data-filter-btn>Applications</button>
+              <button data-filter-btn>Kurumsal</button>
             </li>
 
             <li class="filter-item">
-              <button data-filter-btn>Web development</button>
+              <button data-filter-btn>WordPress</button>
+            </li>
+
+            <li class="filter-item">
+            <button data-filter-btn>Açık Kaynak</button>
             </li>
 
           </ul>
@@ -769,74 +906,74 @@
 
           <ul class="project-list">
 
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
+            <li class="project-item active" data-filter-item data-category="açık kaynak">
+              <a href="javascript:void(0);" class="project-open" data-project-id="project1">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
+                  <img src="./assets/images/project-1.jpg" alt="dof-manager" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">Finance</h3>
+                <h3 class="project-title">DOF Manager</h3>
 
-                <p class="project-category">Web development</p>
+                <p class="project-category">Açık kaynaklı DÖF (Düzeltici Önleyici Faaliyet) takip sistemi. React + PHP tabanlı, SQLite veritabanı entegrasyonlu.</p>
 
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
+            <li class="project-item active" data-filter-item data-category="kurumsal">
+              <a href="javascript:void(0);" class="project-open" data-project-id="project2">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
+                  <img src="./assets/images/project-2.png" alt="Plus Kitchen Intranet Portal" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">Orizon</h3>
+                <h3 class="project-title">Plus Kitchen Intranet Portal</h3>
 
-                <p class="project-category">Web development</p>
+                <p class="project-category">WordPress üzerinde geliştirilmiş kurumsal intranet portalı. Form modülleri, video eğitimler, kullanıcı giriş sistemi ve mobil uygulama entegrasyonu.</p>
 
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
+            <li class="project-item active" data-filter-item data-category="web projeler">
+              <a href="javascript:void(0);" class="project-open" data-project-id="project3">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <img src="./assets/images/project-3.jpg" alt="fundo" loading="lazy">
+                  <img src="./assets/images/project-3.jpg" alt="TaskFlow" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">Fundo</h3>
+                <h3 class="project-title">TaskFlow - BT İş Akışı Sistemi</h3>
 
-                <p class="project-category">Web design</p>
+                <p class="project-category">SQLite veritabanı kullanan görev yönetim sistemi. Kategori bazlı iş takibi, kullanıcı görev ekranları ve süreç yönetimi.</p>
 
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
+            <li class="project-item active" data-filter-item data-category="wordpress">
+              <a href="javascript:void(0);" class="project-open" data-project-id="project4">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
+                  <img src="./assets/images/project-4.png" alt="WordPress Eklentileri" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">Brawlhalla</h3>
+                <h3 class="project-title">WordPress Özel Eklentileri</h3>
 
-                <p class="project-category">Applications</p>
+                <p class="project-category">ACF ve WPForms tabanlı özel eklentiler: Giriş yapan kullanıcı hoşgeldin mesajı, doğum günü kutlama, toplantı rezervasyon sistemi, REST API destekli booking plugini.</p>
 
               </a>
             </li>
@@ -948,7 +1085,602 @@
       <article class="blog" data-page="blog">
 
         <header>
-          <h2 class="h2 article-title">Blog</h2>
+          <h2 class="h2 article-title tr">Blog</h2>
+          <h2 class="h2 article-title en">Blog</h2>
+        </header>
+
+        <section class="blog-posts">
+
+          <ul class="blog-posts-list">
+
+            <li class="blog-post-item">
+              <a href="javascript:void(0);" class="blog-open" data-blog-id="blog1">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-1.jpg" alt="Web Geliştirme Yolculuğum" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Geliştirme</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2025-05-01">May 1, 2025</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Web Geliştirme Yolculuğum</h3>
+
+                  <p class="blog-text">
+                    Front-end ve back-end teknolojilerinde kendimi nasıl geliştirdiğim hakkında bir paylaşım.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="javascript:void(0);" class="blog-open" data-blog-id="blog2">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-2.jpg" alt="WordPress Eklenti Geliştirme" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">WordPress</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2025-04-15">April 15, 2025</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">WordPress'te Özel Eklenti Geliştirme</h3>
+
+                  <p class="blog-text">
+                    ACF ve WPForms kullanarak özel WordPress eklentileri nasıl geliştirilir? Projelerimden örnekler.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="javascript:void(0);" class="blog-open" data-blog-id="blog3">
+
+                <figure class="blog-banner-box">
+                  <img src="./assets/images/blog-3.jpg" alt="Açık Kaynak Yazılım" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+
+                  <div class="blog-meta">
+                    <p class="blog-category">Açık Kaynak</p>
+
+                    <span class="dot"></span>
+
+                    <time datetime="2025-03-20">March 20, 2025</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Açık Kaynak Projelerinin Önemi</h3>
+
+                  <p class="blog-text">
+                    Açık kaynak yazılım felsefesinin kariyer gelişimiyle olan ilişkisi ve girişimcilere katkısı.
+                  </p>
+
+                </div>
+
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+        
+        <!-- Blog Modal Containers -->
+        <div id="blog-modal-container" class="modal-container" style="display: none;">
+          <div class="blog-modal">
+            <div class="blog-modal-close">&times;</div>
+            <h3 id="blog-modal-title" class="h3"></h3>
+            <div id="blog-modal-meta" class="blog-meta"></div>
+            <div id="blog-modal-content"></div>
+          </div>
+        </div>
+
+      </article>
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title tr">Özgeçmiş</h2>
+          <h2 class="h2 article-title en">Resume</h2>
+        </header>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3 tr">Eğitim</h3>
+            <h3 class="h3 en">Education</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title tr">Bilgisayar ve Yazılım Eğitimi</h4>
+              <h4 class="h4 timeline-item-title en">Computer & Software Training</h4>
+
+              <span>2020 — 2022</span>
+
+              <p class="timeline-text tr">
+                Bootstrap, React, JavaScript, PHP ve SQLite konularında kendimi geliştirmek için çeşitli eğitimler aldım ve projeler geliştirdim.
+              </p>
+              <p class="timeline-text en">
+                I've completed various trainings and developed projects to improve my skills in Bootstrap, React, JavaScript, PHP, and SQLite.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title tr">Grafik Tasarım ve Görsel Sanatlar</h4>
+              <h4 class="h4 timeline-item-title en">Graphic Design & Visual Arts</h4>
+
+              <span>2015 — 2019</span>
+
+              <p class="timeline-text tr">
+                Adobe ürünleri (Photoshop, Illustrator, InDesign, After Effects, Premiere Pro) üzerinde uzmanlaşarak grafik tasarım ve video produksiyon yeteneklerimi geliştirdim.
+              </p>
+              <p class="timeline-text en">
+                I specialized in Adobe products (Photoshop, Illustrator, InDesign, After Effects, Premiere Pro) to develop my graphic design and video production skills.
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3 tr">Deneyim</h3>
+            <h3 class="h3 en">Experience</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title tr">Yazılım Geliştirme Uzmanı</h4>
+              <h4 class="h4 timeline-item-title en">Software Development Specialist</h4>
+
+              <span>2020 — Günümüz / Present</span>
+
+              <p class="timeline-text tr">
+                IT departmanında yazılım geliştirme uzmanı olarak görev alıyorum. Portal intranet sistemi geliştirme, Android/iOS sadakat uygulaması düzenlemeleri, API entegrasyonları, ve Simpra entegrasyonları üzerinde çalışıyorum. Ayrıca DÖF takip sistemi (React + PHP) geliştirme sürecini yürütüyorum.
+              </p>
+              <p class="timeline-text en">
+                I work as a software development specialist in the IT department. My responsibilities include developing portal intranet systems, making adjustments to Android/iOS loyalty applications, working with API integrations and Simpra integrations. I'm also leading the development process of a Corrective Preventive Action tracking system using React and PHP.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title tr">Plus Kitchen</h4>
+              <h4 class="h4 timeline-item-title en">Plus Kitchen</h4>
+
+              <span>2018 — 2020</span>
+
+              <p class="timeline-text tr">
+                Portal intranet sistemi geliştirdim (WordPress tabanlı), mobil uygulama düzenlemeleri yaptım, API entegrasyonları üzerinde çalıştım. WPForms + Zapier entegrasyonu, franchise başvuru, iş başvuru ve geri bildirim formları, paket satış sistemi entegrasyonu ve ekran yönetimi projelerini gerçekleştirdim. Ayrıca eğitim videoları hazırladım ve video produksiyonda görev aldım.
+              </p>
+              <p class="timeline-text en">
+                I developed a WordPress-based portal intranet system, made mobile app adjustments, and worked on API integrations. I implemented WPForms + Zapier integration, built franchise application, job application and feedback forms, integrated a package sales system and managed screen content. I also created training videos and participated in video production.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title tr">Grafik Tasarım & Freelance</h4>
+              <h4 class="h4 timeline-item-title en">Graphic Design & Freelance</h4>
+
+              <span>2015 — 2018</span>
+
+              <p class="timeline-text tr">
+                Cafe de Garage için modifiye araç tanıtım çekimleri, Sayın Mermer için blok ürün fotoğrafları ve katalog tasarımı, Güler Reklam, Grafikhane, Nanopan için grafik tasarım hizmetleri sundum. Sayın Medya & Karahisar Medya'da sosyal medya yönetimi yaptım. Ayrıca çeşitli web siteleri ve e-ticaret projeleri geliştirdim.
+              </p>
+              <p class="timeline-text en">
+                I conducted modified vehicle showcase photoshoots for Cafe de Garage, created block product photographs and catalog design for Sayın Mermer, and provided graphic design services for Güler Reklam, Grafikhane, and Nanopan. I managed social media for Sayın Medya & Karahisar Medya. Additionally, I developed various websites and e-commerce projects.
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="skill">
+
+          <h3 class="h3 skills-title tr">Yeteneklerim</h3>
+          <h3 class="h3 skills-title en">My skills</h3>
+
+          <ul class="skills-list content-card">
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5 tr">Full-Stack Web Geliştirme</h5>
+                <h5 class="h5 en">Full-Stack Web Development</h5>
+                <data value="85">85%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 85%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5 tr">WordPress & Eklenti Geliştirme</h5>
+                <h5 class="h5 en">WordPress & Plugin Development</h5>
+                <data value="90">90%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 90%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5 tr">React, PHP, Laravel, JavaScript</h5>
+                <h5 class="h5 en">React, PHP, Laravel, JavaScript</h5>
+                <data value="80">80%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 80%;"></div>
+              </div>
+
+            </li>
+
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5 tr">Grafik Tasarım (Adobe ürünleri)</h5>
+                <h5 class="h5 en">Graphic Design (Adobe products)</h5>
+                <data value="85">85%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 85%;"></div>
+              </div>
+
+            </li>
+            
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5 tr">Video Kurgu & Produksiyon</h5>
+                <h5 class="h5 en">Video Editing & Production</h5>
+                <data value="75">75%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 75%;"></div>
+              </div>
+
+            </li>
+            
+            <li class="skills-item">
+
+              <div class="title-wrapper">
+                <h5 class="h5 tr">API Entegrasyonları</h5>
+                <h5 class="h5 en">API Integrations</h5>
+                <data value="80">80%</data>
+              </div>
+
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 80%;"></div>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title tr">Portfolio</h2>
+          <h2 class="h2 article-title en">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <ul class="filter-list">
+
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web Development</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>E-commerce</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Applications</button>
+            </li>
+
+          </ul>
+
+          <div class="filter-select-box">
+
+            <button class="filter-select" data-select>
+
+              <div class="select-value" data-selecct-value>Select category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+
+            </button>
+
+            <ul class="select-list">
+
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web Development</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>E-commerce</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Applications</button>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <ul class="project-list">
+
+            <li class="project-item active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-1.jpg" alt="dof-manager" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">DÖF Manager</h3>
+
+                <p class="project-category tr">Düzeltici Önleyici Faaliyet takip sistemi</p>
+                <p class="project-category en">Corrective Preventive Action tracking system</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-2.png" alt="bodrum su kaçak bulma" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">BodrumSukaçakbulma.com</h3>
+
+                <p class="project-category tr">Kurumsal Web Sitesi</p>
+                <p class="project-category en">Corporate Website</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-3.jpg" alt="köksoy bilgisayar" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Köksoybilgisayar.com</h3>
+
+                <p class="project-category tr">Kurumsal Web Sitesi</p>
+                <p class="project-category en">Corporate Website</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="e-commerce">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-4.png" alt="peos kozmetik" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Peos Kozmetik</h3>
+
+                <p class="project-category tr">E-ticaret Sitesi</p>
+                <p class="project-category en">E-commerce Website</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="e-commerce">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-5.png" alt="dezi" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Dezi.com.tr</h3>
+
+                <p class="project-category tr">E-ticaret Sitesi</p>
+                <p class="project-category en">E-commerce Website</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web development">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-6.png" alt="elmas organizasyon" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Elmas Organizasyon</h3>
+
+                <p class="project-category tr">Kurumsal Web Sitesi</p>
+                <p class="project-category en">Corporate Website</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-7.png" alt="portal intranet" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Portal Intranet</h3>
+
+                <p class="project-category tr">WordPress Tabanlı Şirket İçi Portal</p>
+                <p class="project-category en">WordPress-based Company Intranet</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-8.jpg" alt="mobil uygulama yönetimi" loading="lazy">
+                </figure>
+
+                <h3 class="project-title tr">Mobil Uygulama Yönetimi</h3>
+                <h3 class="project-title en">Mobile App Management</h3>
+
+                <p class="project-category tr">iOS/Android Sadakat Uygulaması</p>
+                <p class="project-category en">iOS/Android Loyalty Application</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="applications">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-9.png" alt="api entegrasyonları" loading="lazy">
+                </figure>
+
+                <h3 class="project-title tr">API Entegrasyonları</h3>
+                <h3 class="project-title en">API Integrations</h3>
+
+                <p class="project-category tr">Logo API, REST API Entegrasyonları</p>
+                <p class="project-category en">Logo API, REST API Integrations</p>
+
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #BLOG
+      -->
+
+      <article class="blog" data-page="blog">
+
+        <header>
+          <h2 class="h2 article-title tr">Blog</h2>
+          <h2 class="h2 article-title en">Blog</h2>
         </header>
 
         <section class="blog-posts">
@@ -1140,35 +1872,38 @@
       <article class="contact" data-page="contact">
 
         <header>
-          <h2 class="h2 article-title">Contact</h2>
+          <h2 class="h2 article-title">İletişim</h2>
         </header>
 
         <section class="mapbox" data-mapbox>
           <figure>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199666.5651251294!2d-121.58334177520186!3d38.56165006739519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d385396.0510271695!2d28.731984535548535!3d41.00498281155496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVsLCBUw7xya2l5ZQ!5e0!3m2!1str!2str!4v1651661304377!5m2!1str!2str"
               width="400" height="300" loading="lazy"></iframe>
           </figure>
         </section>
 
         <section class="contact-form">
 
-          <h3 class="h3 form-title">Contact Form</h3>
+          <h3 class="h3 form-title">İletişim Formu</h3>
 
-          <form action="#" class="form" data-form>
+          <form id="contact-form" class="form" data-form>
 
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="text" name="from_name" class="form-input" placeholder="İsim Ve Soyisim" required data-form-input>
 
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <input type="email" name="reply_to" class="form-input" placeholder="Email Adresiniz" required data-form-input>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <textarea name="message" class="form-input" placeholder="Mesajınız" required data-form-input></textarea>
 
-            <button class="form-btn" type="submit" disabled data-form-btn>
+            <button class="form-btn" type="submit" data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
+              <span class="tr">Mesaj Gönder</span>
+              <span class="en">Send Message</span>
             </button>
+            
+            <div id="form-result" style="margin-top: 20px; text-align: center; display: none;"></div>
 
           </form>
 
@@ -1195,6 +1930,291 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  
+  <!-- EmailJS for contact form -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Language switching script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const languageToggle = document.getElementById('language-toggle');
+      
+      languageToggle.addEventListener('click', function() {
+        const html = document.documentElement;
+        if (html.lang === 'tr') {
+          html.lang = 'en';
+          this.textContent = 'Türkçe';
+        } else {
+          html.lang = 'tr';
+          this.textContent = 'English';
+        }
+      });
+      
+      // EmailJS Configuration
+      emailjs.init("user_YOUR_USER_ID");
+      
+      const contactForm = document.getElementById('contact-form');
+      const formResult = document.getElementById('form-result');
+      
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Show loading state
+          formResult.style.display = 'block';
+          formResult.innerHTML = '<p>Mesaj gönderiliyor...</p>';
+          
+          // Send the email using EmailJS
+          emailjs.sendForm('service_default', 'template_default', this, 'iwzl pleq kiqt sgvn')
+            .then(function() {
+              formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
+              contactForm.reset();
+            }, function(error) {
+              formResult.innerHTML = '<p style="color: red;">Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.</p>';
+              console.error('EmailJS Error:', error);
+            });
+        });
+      }
+      
+      // Modal işlevselliği için hazırlık
+      // Modal konteynerlerini bulmak yerine kendimiz oluşturalım
+      
+      // Blog modali için konteyner oluştur
+      const blogModalContainer = document.createElement('div');
+      blogModalContainer.id = 'blog-modal-container';
+      blogModalContainer.className = 'modal-container';
+      blogModalContainer.style.display = 'none';
+      
+      blogModalContainer.innerHTML = `
+        <div class="blog-modal">
+          <div class="blog-modal-close">&times;</div>
+          <h3 id="blog-modal-title" class="h3"></h3>
+          <div id="blog-modal-meta" class="blog-meta"></div>
+          <div id="blog-modal-content"></div>
+        </div>
+      `;
+      
+      // Proje modali için konteyner oluştur
+      const projectModalContainer = document.createElement('div');
+      projectModalContainer.id = 'project-modal-container';
+      projectModalContainer.className = 'modal-container';
+      projectModalContainer.style.display = 'none';
+      
+      projectModalContainer.innerHTML = `
+        <div class="project-modal">
+          <div class="project-modal-close">&times;</div>
+          <h3 id="project-modal-title" class="h3"></h3>
+          <div id="project-modal-category"></div>
+          <div id="project-modal-content"></div>
+          <div id="project-modal-links"></div>
+        </div>
+      `;
+      
+      // Modalları body'ye ekle
+      document.body.appendChild(blogModalContainer);
+      document.body.appendChild(projectModalContainer);
+      
+      // Blog modal functionality
+      const blogLinks = document.querySelectorAll('.blog-open');
+      const blogModalClose = blogModalContainer.querySelector('.blog-modal-close');
+      
+      if (blogLinks.length > 0 && blogModalContainer) {
+        blogLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const blogId = this.getAttribute('data-blog-id');
+            openBlogModal(blogId);
+          });
+        });
+        
+        if (blogModalClose) {
+          blogModalClose.addEventListener('click', function() {
+            blogModalContainer.style.display = 'none';
+          });
+        }
+        
+        window.addEventListener('click', function(e) {
+          if (e.target === blogModalContainer) {
+            blogModalContainer.style.display = 'none';
+          }
+        });
+      }
+      
+      // Project modal functionality
+      const projectLinks = document.querySelectorAll('.project-open');
+      const projectModalClose = projectModalContainer.querySelector('.project-modal-close');
+      
+      if (projectLinks.length > 0 && projectModalContainer) {
+        projectLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const projectId = this.getAttribute('data-project-id');
+            openProjectModal(projectId);
+          });
+        });
+        
+        if (projectModalClose) {
+          projectModalClose.addEventListener('click', function() {
+            projectModalContainer.style.display = 'none';
+          });
+        }
+        
+        window.addEventListener('click', function(e) {
+          if (e.target === projectModalContainer) {
+            projectModalContainer.style.display = 'none';
+          }
+        });
+      }
+      
+      // Functions to open modals and populate content
+      function openBlogModal(blogId) {
+        const title = document.getElementById('blog-modal-title');
+        const meta = document.getElementById('blog-modal-meta');
+        const content = document.getElementById('blog-modal-content');
+        
+        // Set content based on blog ID
+        if (blogId === 'blog1') {
+          title.innerHTML = 'Web Geliştirme Yolculuğum';
+          meta.innerHTML = '<p class="blog-category">Web Geliştirme</p><span class="dot"></span><time datetime="2025-05-01">May 1, 2025</time>';
+          content.innerHTML = `
+            <img src="./assets/images/blog-1.jpg" alt="Web Geliştirme Yolculuğum">
+            <p>Programlama yolculuğuma ilk olarak HTML ve CSS ile başladım. Web sitelerinin temel yapı taşları olan bu diller, dijital dünyaya adım atmam için ilk basamak oldu.</p>
+            <p>Daha sonra JavaScript'i öğrenerek web sitelerimi interaktif hale getirmeye başladım. Kullanıcı deneyimini zenginleştiren dinamik öğeler eklemek, projelerimi daha işlevsel kıldı.</p>
+            <p>Backend tarafında ise PHP ile tanıştım. Veritabanı işlemleri, form işlemleri ve dinamik içerik yönetimi konularında kendimi geliştirdim. SQLite ve MySQL veritabanları ile çalışarak veri depolama ve yönetme becerilerimi ilerlettim.</p>
+            <p>Son dönemde React ve Laravel gibi modern framework'lerle çalışmaya başladım. Bu araçlar sayesinde daha karmaşık ve ölçeklenebilir uygulamalar geliştirme fırsatı buldum.</p>
+            <p>Web geliştirme yolculuğumda öğrendiğim en önemli şey, sürekli öğrenme ve gelişimin bu alanın ayrılmaz bir parçası olduğu. Teknoloji dünyasındaki hızlı değişimler, yeni araçları ve yöntemleri takip etmeyi gerektiriyor.</p>
+          `;
+        } else if (blogId === 'blog2') {
+          title.innerHTML = 'WordPress\'te Özel Eklenti Geliştirme';
+          meta.innerHTML = '<p class="blog-category">WordPress</p><span class="dot"></span><time datetime="2025-04-15">April 15, 2025</time>';
+          content.innerHTML = `
+            <img src="./assets/images/blog-2.jpg" alt="WordPress Eklenti Geliştirme">
+            <p>WordPress, web sitesi geliştirme sürecini basitleştiren popüler bir içerik yönetim sistemidir (CMS). Ancak bazen hazır temalar ve eklentiler, müşterilerinizin özel ihtiyaçlarını karşılamak için yeterli olmayabilir. Bu noktada özel eklenti geliştirme devreye girer.</p>
+            <p>ACF (Advanced Custom Fields) ve WPForms gibi araçları kullanarak, WordPress için özel çözümler geliştirmek mümkün. Örneğin, Plus Kitchen için geliştirdiğim intranet portalında, kullanıcıları karşılayan "Hoşgeldiniz" mesajı ve doğum günü kutlama eklentileri büyük beğeni topladı.</p>
+            <p>Bir diğer örnek, toplantı rezervasyon sistemi eklentisi. Bu eklenti, şirket içi toplantı odalarının rezervasyonunu kolaylaştırıyor ve çakışmaları önlemeye yardımcı oluyor.</p>
+            <p>REST API destekli booking eklentisi ise, harici sistemlerle entegrasyon sağlayarak rezervasyon süreçlerini otomatikleştiriyor.</p>
+            <p>Özel WordPress eklentileri geliştirirken, kod kalitesi, güvenlik ve performans konularına dikkat etmek önemli. Ayrıca, WordPress'in sürekli güncellenen yapısına uyum sağlamak için eklentileri düzenli olarak güncellemek gerekiyor.</p>
+          `;
+        } else if (blogId === 'blog3') {
+          title.innerHTML = 'Açık Kaynak Projelerinin Önemi';
+          meta.innerHTML = '<p class="blog-category">Açık Kaynak</p><span class="dot"></span><time datetime="2025-03-20">March 20, 2025</time>';
+          content.innerHTML = `
+            <img src="./assets/images/blog-3.jpg" alt="Açık Kaynak Yazılım">
+            <p>Açık kaynak projeler, yazılım dünyasının en değerli hazinelerinden biridir. Bu projeler, kodlarını herkesin incelemesine, değiştirmesine ve geliştirmesine açarak, bilginin paylaşılmasına ve topluluk işbirliğine olanak tanır.</p>
+            <p>Kendi açık kaynak projelerimden biri olan DOF Manager, şirketlerin düzeltici ve önleyici faaliyetlerini takip etmelerine yardımcı olan bir sistem. React ve PHP kullanarak geliştirdiğim bu proje, SQLite veritabanı ile entegre çalışıyor.</p>
+            <p>Açık kaynak projelere katkıda bulunmak, bir geliştirici olarak teknik becerilerimi geliştirmenin yanı sıra, global bir topluluğun parçası olmamı sağladı. Farklı perspektiflerden öğrenmek ve ortak bir amaç için çalışmak, profesyonel gelişimime büyük katkı sağlıyor.</p>
+            <p>Ayrıca, açık kaynak projeler girişimciler için de değerli bir kaynak. Özellikle başlangıç aşamasındaki girişimler, açık kaynak bileşenler kullanarak maliyetlerini düşürebilir ve daha hızlı geliştirme yapabilirler.</p>
+            <p>Gelecekte, daha fazla açık kaynak projeye katkıda bulunmayı ve kendi projelerimi toplulukla paylaşmayı hedefliyorum. Yazılım dünyasının bu önemli ekosistemine katkı sağlamak, hem kişisel tatmin hem de profesyonel gelişim açısından önemli bir yol.</p>
+          `;
+        }
+        
+        blogModalContainer.style.display = 'flex';
+      }
+      
+      function openProjectModal(projectId) {
+        const title = document.getElementById('project-modal-title');
+        const category = document.getElementById('project-modal-category');
+        const content = document.getElementById('project-modal-content');
+        const links = document.getElementById('project-modal-links');
+        
+        // Set content based on project ID
+        if (projectId === 'project1') {
+          title.innerHTML = 'DOF Manager';
+          category.innerHTML = '<p>Açık Kaynak Proje</p>';
+          content.innerHTML = `
+            <img src="./assets/images/project-1.jpg" alt="DOF Manager">
+            <p>DOF Manager, şirketlerin Düzeltici ve Önleyici Faaliyetlerini (DÖF) takip etmek için geliştirdiğim açık kaynak bir projedir. Kalite yönetim süreçlerinin önemli bir parçası olan DÖF'lerin etkin bir şekilde yönetilmesini sağlamak amacıyla tasarlanmıştır.</p>
+            <p><strong>Kullanılan Teknolojiler:</strong></p>
+            <ul>
+              <li>Frontend: React JS</li>
+              <li>Backend: PHP</li>
+              <li>Veritabanı: SQLite</li>
+              <li>API: RESTful API</li>
+            </ul>
+            <p><strong>Özellikler:</strong></p>
+            <ul>
+              <li>Düzeltici ve önleyici faaliyetlerin oluşturulması ve takibi</li>
+              <li>Sorumlulara otomatik bildirim gönderimi</li>
+              <li>Faaliyetlerin durumlarının güncellenmesi ve raporlanması</li>
+              <li>Geçmiş kayıtların arşivlenmesi</li>
+              <li>Detaylı arama ve filtreleme</li>
+            </ul>
+          `;
+          links.innerHTML = '<a href="https://github.com/alikokrtv" target="_blank">GitHub Repo</a>';
+        } else if (projectId === 'project2') {
+          title.innerHTML = 'Plus Kitchen Intranet Portalı';
+          category.innerHTML = '<p>Kurumsal Proje</p>';
+          content.innerHTML = `
+            <img src="./assets/images/project-2.png" alt="Plus Kitchen Intranet Portalı">
+            <p>Plus Kitchen için geliştirdiğim intranet portalı, firma içi iletişimi ve bilgi paylaşımını güçlendirmek için tasarlanmış kapsamlı bir sistemdir.</p>
+            <p><strong>Kullanılan Teknolojiler:</strong></p>
+            <ul>
+              <li>CMS: WordPress</li>
+              <li>Eklentiler: ACF Pro, WPForms</li>
+              <li>Özel Geliştirmeler: PHP, JavaScript</li>
+              <li>Mobil Uygulama Entegrasyonu</li>
+            </ul>
+            <p><strong>Özellikler:</strong></p>
+            <ul>
+              <li>Kullanıcı giriş ve yetkilendirme sistemi</li>
+              <li>Franchise başvuru formları</li>
+              <li>İş başvuru sistemleri</li>
+              <li>Müşteri geri bildirim mekanizmaları</li>
+              <li>Video eğitim platformu</li>
+              <li>iOS ve Android uygulama entegrasyonu</li>
+              <li>Şube formları ve sadakat programı düzenlemeleri</li>
+            </ul>
+          `;
+          links.innerHTML = '<a href="#" target="_blank">Detaylı Vaka Çalışması</a>';
+        } else if (projectId === 'project3') {
+          title.innerHTML = 'TaskFlow - BT İş Akışı Sistemi';
+          category.innerHTML = '<p>Web Projesi</p>';
+          content.innerHTML = `
+            <img src="./assets/images/project-3.jpg" alt="TaskFlow">
+            <p>TaskFlow, bilgi teknolojileri departmanı için geliştirdiğim görev yönetim sistemidir. BT ekiplerinin iş yükünü etkin bir şekilde planlamalarına ve takip etmelerine olanak sağlar.</p>
+            <p><strong>Kullanılan Teknolojiler:</strong></p>
+            <ul>
+              <li>Backend: PHP</li>
+              <li>Veritabanı: SQLite</li>
+              <li>Frontend: HTML, CSS, JavaScript</li>
+              <li>Ajax ve API Entegrasyonları</li>
+            </ul>
+            <p><strong>Özellikler:</strong></p>
+            <ul>
+              <li>Kategori bazlı iş takibi</li>
+              <li>Kullanıcı görev ekranları</li>
+              <li>Simpra süreç yönetimi</li>
+              <li>Web sitesi geliştirme iş akışları</li>
+              <li>QR menü güncelleme sistemi</li>
+              <li>Uygulama güncelleme yönetimi</li>
+              <li>Performans raporlama ve metrikler</li>
+            </ul>
+          `;
+          links.innerHTML = '<a href="#" target="_blank">Canlı Demo</a>';
+        } else if (projectId === 'project4') {
+          title.innerHTML = 'WordPress Özel Eklentileri';
+          category.innerHTML = '<p>WordPress Geliştirme</p>';
+          content.innerHTML = `
+            <img src="./assets/images/project-4.png" alt="WordPress Eklentileri">
+            <p>WordPress için geliştirdiğim özel eklentiler, müşterilerin ihtiyaçlarına yönelik özelleştirilmiş çözümler sunar. ACF ve WPForms altyapısı kullanılarak geliştirilen bu eklentiler, WordPress sitelerinin işlevselliklerini genişletir.</p>
+            <p><strong>Geliştirilen Özel Eklentiler:</strong></p>
+            <ul>
+              <li><strong>Hoşgeldin Mesajı Eklentisi:</strong> Giriş yapan kullanıcılara kişiselleştirilmiş hoşgeldin mesajları gösterir.</li>
+              <li><strong>Yeni Katılanlar Listesi:</strong> Siteye yeni üye olanları listeler ve tanıtır.</li>
+              <li><strong>Doğum Günü Kutlama:</strong> Kullanıcıların doğum günlerini anımsatan ve kutlama mesajları gösteren sistem.</li>
+              <li><strong>Toplantı Rezervasyon Sistemi:</strong> Toplantı odaları ve zaman dilimlerinin rezerve edilmesini sağlar.</li>
+              <li><strong>REST API Destekli Booking:</strong> Harici sistemler ile entegre çalışan rezervasyon sistemi.</li>
+              <li><strong>Kalite Kontrol Paneli:</strong> Şirket içi kalite süreçlerinin takibi ve raporlanması.</li>
+              <li><strong>WPForms + Zapier Entegrasyonu:</strong> Form verilerinin otomatik olarak işlenmesi ve diğer sistemlere aktarılması.</li>
+            </ul>
+          `;
+          links.innerHTML = '<a href="#" target="_blank">Demo Sitesi</a> <a href="#" target="_blank">WordPress Plugin Detayları</a>';
+        }
+        
+        projectModalContainer.style.display = 'flex';
+      }
+    });
+  </script>
 
 </body>
 
