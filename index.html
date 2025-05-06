@@ -1977,53 +1977,8 @@
     </div>
   </div>
 
-  <!-- Yeni EmailJS Konfigürasyonu - son sürüm -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script type="text/javascript">
-    // EmailJS'i sayfanın yüklenmesinden sonra başlat
-    window.onload = function() {
-      console.log('Sayfa tam olarak yüklendi');
-      // EmailJS başlatma
-      emailjs.init("service_3jxhhgr");
-      
-      // Form elemanını bul
-      var contactForm = document.getElementById('contact-form');
-      var formResult = document.getElementById('form-result');
-      
-      if (contactForm) {
-        console.log('İletişim formu bulundu');
-        // Form gönderimi olayını dinle
-        contactForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          console.log('Form gönderiliyor...');
-          
-          // Loading durumunu göster
-          formResult.style.display = 'block';
-          formResult.innerHTML = '<p>Mesaj gönderiliyor...</p>';
-          
-          // Form verilerini hazırla
-          var templateParams = {
-            from_name: this.querySelector('[name="from_name"]').value,
-            reply_to: this.querySelector('[name="reply_to"]').value,
-            message: this.querySelector('[name="message"]').value
-          };
-          
-          // EmailJS ile gönder
-          emailjs.send('service_3jxhhgr', 'template_1lq7l2k', templateParams, 'iwzl pleq kiqt sgvn')
-            .then(function(response) {
-              console.log('SUCCESS!', response.status, response.text);
-              formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
-              contactForm.reset();
-            }, function(error) {
-              console.log('FAILED...', error);
-              formResult.innerHTML = '<p style="color: red;">Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>';
-            });
-        });
-      } else {
-        console.log('İletişim formu bulunamadı');
-      }
-    };
-  </script>
+  <!-- jQuery ekliyoruz -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   
   <!-- custom js link -->
   <script src="./assets/js/script.js"></script>
