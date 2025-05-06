@@ -138,26 +138,26 @@ $(document).ready(function() {
   const pages = document.querySelectorAll("[data-page]");
 
   // Tüm gezinme bağlantılarına olay dinleyicisi ekleme
-  navigationLinks.forEach(function(link) {
-    link.addEventListener("click", function() {
-      const targetPage = document.querySelector(`[data-page="${this.dataset.navLink}"]`);
-
-      // Tüm sayfaları ve navigasyon linklerini deaktive et
-      pages.forEach(function(page) {
-        page.classList.remove("active");
-      });
-
-      navigationLinks.forEach(function(navLink) {
-        navLink.classList.remove("active");
-      });
-
-      // Hedef sayfayı ve tıklanan navigasyon linkini aktifleştir
-      if (targetPage) {
-        targetPage.classList.add("active");
-        this.classList.add("active");
+  for (let i = 0; i < navigationLinks.length; i++) {
+    navigationLinks[i].addEventListener("click", function() {
+      // Tüm sayfaları gizle
+      for (let j = 0; j < pages.length; j++) {
+        pages[j].classList.remove("active");
       }
+
+      // Tüm navigasyon linklerini deaktif yap
+      for (let j = 0; j < navigationLinks.length; j++) {
+        navigationLinks[j].classList.remove("active");
+      }
+
+      // Tıklanan linkin indeksine karşılık gelen sayfayı göster
+      pages[i].classList.add("active");
+      // Tıklanan linki aktif yap
+      this.classList.add("active");
+
+      console.log("Navigasyon tıklandı: " + i + ". sayfaya geçiş yapılıyor");
     });
-  });
+  }
 
   /**
    * Portfolio Projeleri için Modal İşlemleri
