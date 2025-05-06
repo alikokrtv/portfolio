@@ -193,17 +193,117 @@ code {
   color: var(--orange-yellow-crayola);
 }
 
+/* Canvas/Açılır Pencere Sistemi */
+.canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.canvas-container.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.canvas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 1;
+}
+
+.canvas-content {
+  position: relative;
+  background-color: var(--eerie-black-1);
+  border-radius: 16px;
+  padding: 30px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow-y: auto;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(30px);
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.canvas-container.active .canvas-content {
+  transform: translateY(0);
+}
+
+.canvas-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 28px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--jet);
+  color: var(--orange-yellow-crayola);
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 10;
+}
+
+.canvas-close:hover {
+  background-color: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+}
+
+.canvas-title {
+  color: var(--orange-yellow-crayola);
+  font-size: 28px;
+  margin-bottom: 10px;
+  padding-right: 40px;
+}
+
+.canvas-category, .canvas-meta {
+  color: var(--light-gray);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.canvas-body {
+  margin-bottom: 30px;
+  line-height: 1.7;
+}
+
+/* Açılır pencere sisteminde body scroll'unu engelleme */
+body.no-scroll {
+  overflow: hidden;
+}
+
 /* Responsiveness */
 @media screen and (max-width: 768px) {
-  .project-modal, .blog-modal {
+  .canvas-content {
     padding: 20px;
-    width: 90%;
-    max-width: 500px;
+    width: 95%;
   }
   
-  .modal-close {
+  .canvas-close {
     top: 15px;
     right: 15px;
+  }
+  
+  .canvas-title {
+    font-size: 22px;
   }
 }
 

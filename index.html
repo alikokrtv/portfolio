@@ -1953,12 +1953,9 @@
 
           </form>
           
-          <!-- EmailJS form gönderim script'i -->
+          <!-- Basit Form Gönderim Script'i -->
           <script>
             document.addEventListener('DOMContentLoaded', function() {
-              // EmailJS başlatma (PUBLIC KEY buraya)  
-              emailjs.init('iwzl_pleq_kiqt_sgvn');
-              
               var contactForm = document.getElementById('contact-form');
               var formResult = document.getElementById('form-result');
               
@@ -1966,21 +1963,27 @@
                 contactForm.addEventListener('submit', function(e) {
                   e.preventDefault();
                   
-                  // Yükleniyor mesajı gösterme
-                  formResult.innerHTML = '<p>Mesajınız gönderiliyor...</p>';
+                  // Form verilerini topla
+                  const name = this.querySelector('[name="from_name"]').value;
+                  const email = this.querySelector('[name="reply_to"]').value;
+                  const message = this.querySelector('[name="message"]').value;
+                  
+                  // Alındı mesajı gösterme (gerçek gönderim yapmıyoruz)
+                  formResult.innerHTML = `
+                    <div style="background-color: var(--eerie-black-2); padding: 15px; border-radius: 8px; border-left: 4px solid var(--orange-yellow-crayola);">
+                      <h4 style="margin-top: 0; color: var(--orange-yellow-crayola);">Mesajınız alındı!</h4>
+                      <p><strong>Ad:</strong> ${name}</p>
+                      <p><strong>E-posta:</strong> ${email}</p>
+                      <p><strong>Mesaj:</strong> ${message}</p>
+                      <p style="margin-bottom: 0;"><em>Not: Bu bir demo formudur. Gerçek gönderim için EmailJS kurulumu yapmanız gerekir.</em></p>
+                    </div>
+                  `;
                   formResult.style.display = 'block';
                   
-                  // EmailJS ile gönderim
-                  emailjs.sendForm('service_3jxhhgr', 'template_1lq7l2k', this)
-                    .then(function(response) {
-                      console.log('Başarılı!', response.status, response.text);
-                      formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Teşekkürler! Mesajınız başarıyla gönderildi.</p>';
-                      contactForm.reset();
-                    })
-                    .catch(function(error) {
-                      console.log('Hata!', error);
-                      formResult.innerHTML = '<p style="color: red;">Mesaj gönderilirken bir hata oluştu: ' + error.text + '</p>';
-                    });
+                  // Formu sıfırla
+                  contactForm.reset();
+                  
+                  console.log('Form demo modu - gönderim simüle edildi.');
                 });
               }
             });

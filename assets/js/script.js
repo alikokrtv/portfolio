@@ -190,133 +190,169 @@ $(document).ready(function() {
   }
 
   /**
-   * *** MODAL SİSTEMİ ***
-   * Portfolyo ve blog modalları için işlevsellik
+   * *** CANVAS/AÇILIR PENCERE SİSTEMİ ***
+   * Portfolyo ve blog canvas/açılır pencereleri için işlevsellik
    */
   
-  // 1. Portfolyo Modalları - Tıklandığında içerikleri gösterme
+  // 1. Portfolyo Canvas/Açılır Pencere Sistemi
   $(".project-open").on("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
     console.log("Proje içeriğine tıklandı!");
     
     const projectId = $(this).data("project-id");
-    const modalSelector = `#project-modal-${projectId}`;
+    const canvasSelector = `#project-canvas-${projectId}`;
+    console.log(`Proje ID: ${projectId}`);
     
-    console.log(`Proje modalı açılıyor: ID=${projectId}, Seçici=${modalSelector}`);
-    
-    // Modal zaten varsa göster
-    if ($(modalSelector).length) {
-      $(modalSelector).fadeIn(300);
+    // Eğer canvas zaten oluşturulduysa göster, yoksa oluştur
+    if ($(canvasSelector).length) {
+      $(canvasSelector).addClass('active');
+      $('body').addClass('no-scroll');
+      console.log(`Mevcut canvas gösteriliyor: ${canvasSelector}`);
     } else {
-      // Modal yok, project-data.js'den içerik al ve oluştur
+      console.log("Canvas oluşturuluyor...");
+      
+      // Projeler için veri fonksiyonu
       if (typeof getProjectContent === 'function') {
         const projectInfo = getProjectContent(projectId.toString());
         
-        // Modal HTML'ini oluştur - geri tuşu eklenmiş versiyon
-        const modalHtml = `
-          <div id="project-modal-${projectId}" class="modal-container" style="display: none;">
-            <div class="project-modal">
-              <div class="modal-close">&times;</div>
-              <h3 class="project-modal-title">${projectInfo.title}</h3>
-              <div class="project-modal-category">${projectInfo.category}</div>
-              <div class="project-modal-content">${projectInfo.content}</div>
-              <div class="project-modal-links">${projectInfo.links || ''}</div>
-              <div class="modal-back-button">
+        // Canvas HTML'ini oluştur - tam ekran animasyonlu versiyon
+        const canvasHtml = `
+          <div id="project-canvas-${projectId}" class="canvas-container">
+            <div class="canvas-overlay"></div>
+            <div class="canvas-content">
+              <div class="canvas-close">&times;</div>
+              <h3 class="canvas-title">${projectInfo.title}</h3>
+              <div class="canvas-category">${projectInfo.category}</div>
+              <div class="canvas-body">${projectInfo.content}</div>
+              <div class="canvas-links">${projectInfo.links || ''}</div>
+              <div class="canvas-back-button">
                 <button class="back-btn"><ion-icon name="arrow-back-outline"></ion-icon> Geri</button>
               </div>
             </div>
           </div>
         `;
         
-        // Modalı body'ye ekle
-        $("body").append(modalHtml);
+        // Canvas HTML'ini body'ye ekle
+        $("body").append(canvasHtml);
         
-        // Modal kapatma işlevi ekle
-        $(`#project-modal-${projectId} .modal-close`).on("click", function() {
-          $(this).closest(".modal-container").fadeOut(300);
-        });
+        // Yeni oluşturulan canvası göster (animasyon için timeout ekle)
+        setTimeout(() => {
+          $(canvasSelector).addClass('active');
+          $('body').addClass('no-scroll');
+        }, 10);
         
-        // Modalı göster
-        $(`#project-modal-${projectId}`).fadeIn(300);
+        console.log(`Yeni canvas oluşturuldu ve gösteriliyor: ${canvasSelector}`);
       } else {
-        console.error("getProjectContent fonksiyonu bulunamadı. project-data.js yüklendi mi?");
+        console.error("getProjectContent fonksiyonu bulunamadı!");
       }
     }
   });
 
-  // 2. Blog Modalları
+  // 2. Blog Canvas/Açılır Pencere Sistemi
   $(".blog-open").on("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
     
     const blogId = $(this).data("blog-id");
-    const modalSelector = `#blog-modal-${blogId}`;
+    const canvasSelector = `#blog-canvas-${blogId}`;
     
-    console.log(`Blog modalı açılıyor: ID=${blogId}, Seçici=${modalSelector}`);
+    console.log(`Blog canvas açılıyor: ID=${blogId}, Seçici=${canvasSelector}`);
     
-    // Modal zaten varsa göster
-    if ($(modalSelector).length) {
-      $(modalSelector).fadeIn(300);
+    // Blog canvası zaten varsa göster
+    if ($(canvasSelector).length) {
+      $(canvasSelector).addClass('active');
+      $('body').addClass('no-scroll');
+      console.log(`Mevcut blog canvası gösteriliyor: ${canvasSelector}`);
     } else {
-      // Modal yok, project-data.js'den içerik al ve oluştur
+      // Canvas yok, project-data.js'den blog içeriğini al ve oluştur
       if (typeof getBlogContent === 'function') {
         const blogInfo = getBlogContent(blogId.toString());
         
-        // Modal HTML'ini oluştur
-        const modalHtml = `
-          <div id="blog-modal-${blogId}" class="modal-container" style="display: none;">
-            <div class="blog-modal">
-              <div class="modal-close">&times;</div>
-              <h3 class="blog-modal-title">${blogInfo.title}</h3>
-              <div class="blog-modal-meta">${blogInfo.meta}</div>
-              <div class="blog-modal-content">${blogInfo.content}</div>
-              <div class="modal-back-button">
+        // Canvas HTML'ini oluştur - tam ekran animasyonlu versiyon
+        const canvasHtml = `
+          <div id="blog-canvas-${blogId}" class="canvas-container blog-canvas">
+            <div class="canvas-overlay"></div>
+            <div class="canvas-content">
+              <div class="canvas-close">&times;</div>
+              <h3 class="canvas-title">${blogInfo.title}</h3>
+              <div class="canvas-meta">${blogInfo.meta}</div>
+              <div class="canvas-body">${blogInfo.content}</div>
+              <div class="canvas-back-button">
                 <button class="back-btn"><ion-icon name="arrow-back-outline"></ion-icon> Geri</button>
               </div>
             </div>
           </div>
         `;
         
-        // Modalı body'ye ekle
-        $("body").append(modalHtml);
+        // Canvası body'ye ekle
+        $("body").append(canvasHtml);
         
-        // Modal kapatma işlevi ekle
-        $(`#blog-modal-${blogId} .modal-close`).on("click", function() {
-          $(this).closest(".modal-container").fadeOut(300);
-        });
+        // Yeni oluşturulan canvası göster (animasyon için timeout ekle)
+        setTimeout(() => {
+          $(canvasSelector).addClass('active');
+          $('body').addClass('no-scroll');
+        }, 10);
         
-        // Modalı göster
-        $(`#blog-modal-${blogId}`).fadeIn(300);
+        console.log(`Yeni blog canvası oluşturuldu ve gösteriliyor: ${canvasSelector}`);
       } else {
         console.error("getBlogContent fonksiyonu bulunamadı. project-data.js yüklendi mi?");
       }
     }
   });
 
-  // 3. Genel Modal Kapatma İşlevleri
-  // Dokümana event listener ekle
-  $(document).on("click", ".modal-close", function() {
-    $(this).closest(".modal-container").fadeOut(300);
+  // 3. Genel Canvas/Açılır Pencere Kapatma İşlevleri
+  
+  // Kapatma butonuna tıklayınca canvası kapatma
+  $(document).on("click", ".canvas-close", function() {
+    const canvas = $(this).closest(".canvas-container");
+    canvas.removeClass('active');
+    setTimeout(() => {
+      canvas.remove(); // Tamamen kaldır
+      if ($('.canvas-container.active').length === 0) {
+        $('body').removeClass('no-scroll');
+      }
+    }, 400);
   });
 
-  // Modalın dışına tıklayınca kapatma
-  $(document).on("click", ".modal-container", function(e) {
-    if ($(e.target).hasClass("modal-container")) {
-      $(this).fadeOut(300);
-    }
+  // Dış overlay'e tıklayınca kapatma
+  $(document).on("click", ".canvas-overlay", function() {
+    const canvas = $(this).closest(".canvas-container");
+    canvas.removeClass('active');
+    setTimeout(() => {
+      canvas.remove();
+      if ($('.canvas-container.active').length === 0) {
+        $('body').removeClass('no-scroll');
+      }
+    }, 400);
   });
   
-  // Geri tuşuna tıklandığında modalı kapatma
+  // Geri tuşuna tıklandığında canvası kapatma
   $(document).on("click", ".back-btn", function() {
     console.log("Geri tuşuna tıklandı");
-    $(this).closest(".modal-container").fadeOut(300);
+    const canvas = $(this).closest(".canvas-container");
+    canvas.removeClass('active');
+    setTimeout(() => {
+      canvas.remove();
+      if ($('.canvas-container.active').length === 0) {
+        $('body').removeClass('no-scroll');
+      }
+    }, 400);
   });
 
-  // ESC tuşuna basınca açık modalı kapatma
+  // ESC tuşuna basınca açık canvası kapatma
   $(document).on('keydown', function(e) {
     if (e.key === "Escape") {
-      $(".modal-container:visible").fadeOut(300);
+      const activeCanvas = $(".canvas-container.active");
+      if (activeCanvas.length) {
+        activeCanvas.removeClass('active');
+        setTimeout(() => {
+          activeCanvas.remove();
+          if ($('.canvas-container.active').length === 0) {
+            $('body').removeClass('no-scroll');
+          }
+        }, 400);
+      }
     }
   });
 
