@@ -194,10 +194,11 @@ $(document).ready(function() {
    * Portfolyo ve blog modalları için işlevsellik
    */
   
-  // 1. Portfolyo Modalları
+  // 1. Portfolyo Modalları - Tıklandığında içerikleri gösterme
   $(".project-open").on("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
+    console.log("Proje içeriğine tıklandı!");
     
     const projectId = $(this).data("project-id");
     const modalSelector = `#project-modal-${projectId}`;
@@ -212,7 +213,7 @@ $(document).ready(function() {
       if (typeof getProjectContent === 'function') {
         const projectInfo = getProjectContent(projectId.toString());
         
-        // Modal HTML'ini oluştur
+        // Modal HTML'ini oluştur - geri tuşu eklenmiş versiyon
         const modalHtml = `
           <div id="project-modal-${projectId}" class="modal-container" style="display: none;">
             <div class="project-modal">
@@ -221,6 +222,9 @@ $(document).ready(function() {
               <div class="project-modal-category">${projectInfo.category}</div>
               <div class="project-modal-content">${projectInfo.content}</div>
               <div class="project-modal-links">${projectInfo.links || ''}</div>
+              <div class="modal-back-button">
+                <button class="back-btn"><ion-icon name="arrow-back-outline"></ion-icon> Geri</button>
+              </div>
             </div>
           </div>
         `;
@@ -267,6 +271,9 @@ $(document).ready(function() {
               <h3 class="blog-modal-title">${blogInfo.title}</h3>
               <div class="blog-modal-meta">${blogInfo.meta}</div>
               <div class="blog-modal-content">${blogInfo.content}</div>
+              <div class="modal-back-button">
+                <button class="back-btn"><ion-icon name="arrow-back-outline"></ion-icon> Geri</button>
+              </div>
             </div>
           </div>
         `;
@@ -298,6 +305,12 @@ $(document).ready(function() {
     if ($(e.target).hasClass("modal-container")) {
       $(this).fadeOut(300);
     }
+  });
+  
+  // Geri tuşuna tıklandığında modalı kapatma
+  $(document).on("click", ".back-btn", function() {
+    console.log("Geri tuşuna tıklandı");
+    $(this).closest(".modal-container").fadeOut(300);
   });
 
   // ESC tuşuna basınca açık modalı kapatma

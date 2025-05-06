@@ -1933,18 +1933,12 @@
 
           <h3 class="h3 form-title">İletişim Formu</h3>
 
-          <!-- Netlify Form - %100 çalışacakıtr -->
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form" id="contact-form" data-form>
-            <!-- Netlify form için gizli alan -->
-            <input type="hidden" name="form-name" value="contact" />
-            <p style="display:none">
-              <label>Doldurmayın: <input name="bot-field" /></label>
-            </p>
-
+          <!-- EmailJS Form -->
+          <form class="form" id="contact-form" data-form>
             <div class="input-wrapper">
-              <input type="text" name="name" class="form-input" placeholder="İsim Ve Soyisim" required data-form-input>
+              <input type="text" name="from_name" class="form-input" placeholder="İsim Ve Soyisim" required data-form-input>
 
-              <input type="email" name="email" class="form-input" placeholder="Email Adresiniz" required data-form-input>
+              <input type="email" name="reply_to" class="form-input" placeholder="Email Adresiniz" required data-form-input>
             </div>
 
             <textarea name="message" class="form-input" placeholder="Mesajınız" required data-form-input></textarea>
@@ -1959,19 +1953,34 @@
 
           </form>
           
-          <!-- Netlify form gönderim başarı mesajını göstermek için script -->
+          <!-- EmailJS form gönderim script'i -->
           <script>
             document.addEventListener('DOMContentLoaded', function() {
+              // EmailJS başlatma (PUBLIC KEY buraya)  
+              emailjs.init('iwzl_pleq_kiqt_sgvn');
+              
               var contactForm = document.getElementById('contact-form');
+              var formResult = document.getElementById('form-result');
+              
               if (contactForm) {
-                contactForm.addEventListener('submit', function() {
-                  // Form başarıyla gönderildiğinde Netlify sayfayı yönlendirecek
-                  // Bu sadece kullanıcıya bir bildirim göstermek için
-                  setTimeout(function() {
-                    document.getElementById('form-result').innerHTML = 
-                      '<p style="color: var(--orange-yellow-crayola);">Teşekkürler! Mesajınız başarıyla gönderildi.</p>';
-                    document.getElementById('form-result').style.display = 'block';
-                  }, 500);
+                contactForm.addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  
+                  // Yükleniyor mesajı gösterme
+                  formResult.innerHTML = '<p>Mesajınız gönderiliyor...</p>';
+                  formResult.style.display = 'block';
+                  
+                  // EmailJS ile gönderim
+                  emailjs.sendForm('service_3jxhhgr', 'template_1lq7l2k', this)
+                    .then(function(response) {
+                      console.log('Başarılı!', response.status, response.text);
+                      formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Teşekkürler! Mesajınız başarıyla gönderildi.</p>';
+                      contactForm.reset();
+                    })
+                    .catch(function(error) {
+                      console.log('Hata!', error);
+                      formResult.innerHTML = '<p style="color: red;">Mesaj gönderilirken bir hata oluştu: ' + error.text + '</p>';
+                    });
                 });
               }
             });
