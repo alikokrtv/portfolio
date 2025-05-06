@@ -1952,7 +1952,10 @@
       });
       
       // EmailJS Configuration
-      emailjs.init("iwzl pleq kiqt sgvn");
+      // Public key ile başlatma
+      (function() {
+        emailjs.init('iwzl pleq kiqt sgvn'); // Gmail App Password ile init
+      })();
       
       const contactForm = document.getElementById('contact-form');
       const formResult = document.getElementById('form-result');
@@ -1965,7 +1968,7 @@
           formResult.style.display = 'block';
           formResult.innerHTML = '<p>Mesaj gönderiliyor...</p>';
           
-          // Send the email using EmailJS
+          // Send the email using EmailJS ve güvenli gönderim
           emailjs.sendForm('service_3jxhhgr', 'template_1lq7l2k', this, 'iwzl pleq kiqt sgvn')
             .then(function() {
               formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
@@ -1977,31 +1980,21 @@
         });
       }
       
-      // Modal işlevselliği için hazırlık
-      // Modal konteynerlerini bulmak yerine kendimiz oluşturalım
-      
-      // Blog modali için konteyner oluştur
-      const blogModalContainer = document.createElement('div');
-      blogModalContainer.id = 'blog-modal-container';
-      blogModalContainer.className = 'modal-container';
-      blogModalContainer.style.display = 'none';
-      
-      blogModalContainer.innerHTML = `
+      // Modal container'ları HTML içerisine doğrudan ekleyelim
+      // Önce modal container'ları oluşturalım
+      const blogModalHtml = `
+      <div id="blog-modal-container" class="modal-container" style="display: none;">
         <div class="blog-modal">
           <div class="blog-modal-close">&times;</div>
           <h3 id="blog-modal-title" class="h3"></h3>
           <div id="blog-modal-meta" class="blog-meta"></div>
           <div id="blog-modal-content"></div>
         </div>
+      </div>
       `;
       
-      // Proje modali için konteyner oluştur
-      const projectModalContainer = document.createElement('div');
-      projectModalContainer.id = 'project-modal-container';
-      projectModalContainer.className = 'modal-container';
-      projectModalContainer.style.display = 'none';
-      
-      projectModalContainer.innerHTML = `
+      const projectModalHtml = `
+      <div id="project-modal-container" class="modal-container" style="display: none;">
         <div class="project-modal">
           <div class="project-modal-close">&times;</div>
           <h3 id="project-modal-title" class="h3"></h3>
@@ -2009,63 +2002,68 @@
           <div id="project-modal-content"></div>
           <div id="project-modal-links"></div>
         </div>
+      </div>
       `;
       
-      // Modalları body'ye ekle
-      document.body.appendChild(blogModalContainer);
-      document.body.appendChild(projectModalContainer);
+      // Modal HTML'lerini body'ye ekle
+      document.body.insertAdjacentHTML('beforeend', blogModalHtml);
+      document.body.insertAdjacentHTML('beforeend', projectModalHtml);
       
-      // Blog modal functionality
+      // Modal elementlerini seç
+      const blogModalContainer = document.getElementById('blog-modal-container');
+      const projectModalContainer = document.getElementById('project-modal-container');
+      
+      // Blog linkleri için tıklama olayı
       const blogLinks = document.querySelectorAll('.blog-open');
-      const blogModalClose = blogModalContainer.querySelector('.blog-modal-close');
+      console.log('Blog link sayısı:', blogLinks.length);
       
-      if (blogLinks.length > 0 && blogModalContainer) {
-        blogLinks.forEach(link => {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const blogId = this.getAttribute('data-blog-id');
-            openBlogModal(blogId);
-          });
+      blogLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          console.log('Blog link tıklandı:', this.getAttribute('data-blog-id'));
+          e.preventDefault();
+          const blogId = this.getAttribute('data-blog-id');
+          openBlogModal(blogId);
         });
-        
-        if (blogModalClose) {
-          blogModalClose.addEventListener('click', function() {
-            blogModalContainer.style.display = 'none';
-          });
-        }
-        
-        window.addEventListener('click', function(e) {
-          if (e.target === blogModalContainer) {
-            blogModalContainer.style.display = 'none';
-          }
-        });
-      }
+      });
       
-      // Project modal functionality
+      // Proje linkleri için tıklama olayı
       const projectLinks = document.querySelectorAll('.project-open');
-      const projectModalClose = projectModalContainer.querySelector('.project-modal-close');
+      console.log('Proje link sayısı:', projectLinks.length);
       
-      if (projectLinks.length > 0 && projectModalContainer) {
-        projectLinks.forEach(link => {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const projectId = this.getAttribute('data-project-id');
-            openProjectModal(projectId);
-          });
+      projectLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          console.log('Proje link tıklandı:', this.getAttribute('data-project-id'));
+          e.preventDefault();
+          const projectId = this.getAttribute('data-project-id');
+          openProjectModal(projectId);
         });
-        
-        if (projectModalClose) {
-          projectModalClose.addEventListener('click', function() {
-            projectModalContainer.style.display = 'none';
-          });
-        }
-        
-        window.addEventListener('click', function(e) {
-          if (e.target === projectModalContainer) {
-            projectModalContainer.style.display = 'none';
-          }
+      });
+      
+      // Modal kapatma düğmeleri için olay dinleyicileri
+      const blogModalClose = document.querySelector('#blog-modal-container .blog-modal-close');
+      const projectModalClose = document.querySelector('#project-modal-container .project-modal-close');
+      
+      if (blogModalClose) {
+        blogModalClose.addEventListener('click', function() {
+          blogModalContainer.style.display = 'none';
         });
       }
+      
+      if (projectModalClose) {
+        projectModalClose.addEventListener('click', function() {
+          projectModalContainer.style.display = 'none';
+        });
+      }
+      
+      // Dış tıklama ile modal kapatma
+      window.addEventListener('click', function(e) {
+        if (e.target === blogModalContainer) {
+          blogModalContainer.style.display = 'none';
+        }
+        if (e.target === projectModalContainer) {
+          projectModalContainer.style.display = 'none';
+        }
+      });
       
       // Functions to open modals and populate content
       function openBlogModal(blogId) {
