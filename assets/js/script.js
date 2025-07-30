@@ -98,50 +98,68 @@ $(document).ready(function() {
   /**
    * Dil değiştirme fonksiyonu
    */
-  const langToggleBtn = document.querySelector("[data-language-btn]");
+  const langToggleBtn = document.getElementById("language-toggle");
   const trElements = $(".tr");
   const enElements = $(".en");
 
   // Dil ayarlama fonksiyonu
   function setLanguage(lang) {
+    console.log('Setting language to:', lang);
+    
     if (lang === "tr") {
-      trElements.show();
-      enElements.hide();
+      // HTML lang attribute'unu güncelle
+      document.documentElement.setAttribute('lang', 'tr');
+      // Button text'ini güncelle
+      if (langToggleBtn) {
+        langToggleBtn.textContent = 'English';
+        langToggleBtn.classList.remove("active");
+      }
     } else if (lang === "en") {
-      trElements.hide();
-      enElements.show();
+      // HTML lang attribute'unu güncelle
+      document.documentElement.setAttribute('lang', 'en');
+      // Button text'ini güncelle
+      if (langToggleBtn) {
+        langToggleBtn.textContent = 'Türkçe';
+        langToggleBtn.classList.add("active");
+      }
     }
+    
+    console.log('Language set successfully to:', lang);
   }
 
   // Dil tercihi yükleme
   if (localStorage.getItem("language")) {
     const savedLang = localStorage.getItem("language");
+    console.log('Loading saved language:', savedLang);
     setLanguage(savedLang);
-    
-    if (savedLang === "en" && langToggleBtn) {
-      langToggleBtn.classList.add("active");
-    } else if (langToggleBtn) {
-      langToggleBtn.classList.remove("active");
-    }
   } else {
     // Varsayılan olarak Türkçe
+    console.log('Setting default language: Turkish');
     setLanguage("tr");
-    if (langToggleBtn) langToggleBtn.classList.remove("active");
+    localStorage.setItem("language", "tr");
   }
 
   // Dil butonuna tıklama işlemi
   if (langToggleBtn) {
-    $(langToggleBtn).on("click", function() {
-      elemToggleFunc(langToggleBtn);
+    console.log('Language toggle button found, adding event listener');
+    $(langToggleBtn).on("click", function(e) {
+      e.preventDefault();
+      console.log('Language toggle clicked');
       
-      if (langToggleBtn.classList.contains("active")) {
+      const currentLang = localStorage.getItem("language") || "tr";
+      
+      if (currentLang === "tr") {
         setLanguage("en");
         localStorage.setItem("language", "en");
+        console.log('Switched to English');
       } else {
         setLanguage("tr");
         localStorage.setItem("language", "tr");
+        console.log('Switched to Turkish');
       }
     });
+  } else {
+    console.error('Language toggle button not found!');
   }
 
   /**
