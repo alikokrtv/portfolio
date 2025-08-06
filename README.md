@@ -48,8 +48,8 @@ Modern, high-performance personal portfolio website showcasing software developm
 ### Quick Start
 ```bash
 # Clone the repository
-git clone https://github.com/alikokrtv/vcard-personal-portfolio.git
-cd vcard-personal-portfolio
+git clone https://github.com/alikokrtv/portfolio.git
+cd portfolio
 
 # Install dependencies
 npm install

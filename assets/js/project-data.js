@@ -292,7 +292,8 @@ function getProjectContent(projectId) {
             <li><strong>İkonlar:</strong> Ionicons</li>
           </ul>
         `,
-        links: '<a href="https://github.com/alikokrtv/vcard-personal-portfolio" target="_blank" class="btn">GitHub Repo</a>'
+        // Link corrected to point to the actual portfolio repository rather than the vCard template
+        links: '<a href="https://github.com/alikokrtv/portfolio" target="_blank" class="btn">GitHub Repo</a>'
       },
       en: {
         title: 'Personal Portfolio Website',
@@ -323,7 +324,8 @@ function getProjectContent(projectId) {
             <li><strong>Icons:</strong> Ionicons</li>
           </ul>
         `,
-        links: '<a href="https://github.com/alikokrtv/vcard-personal-portfolio" target="_blank" class="btn">GitHub Repo</a>'
+        // Link corrected to point to the actual portfolio repository rather than the vCard template
+        links: '<a href="https://github.com/alikokrtv/portfolio" target="_blank" class="btn">GitHub Repo</a>'
       }
     }
   };

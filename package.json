@@ -29,10 +29,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alikokrtv/vcard-personal-portfolio.git"
+    "url": "https://github.com/alikokrtv/portfolio.git"
   },
   "bugs": {
-    "url": "https://github.com/alikokrtv/vcard-personal-portfolio/issues"
+    "url": "https://github.com/alikokrtv/portfolio/issues"
   },
   "homepage": "https://alikokrtv.github.io",
   "devDependencies": {
