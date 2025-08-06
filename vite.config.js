@@ -13,19 +13,14 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     minify: 'terser',
-    sourcemap: true,
+    sourcemap: false, // Production'da sourcemap gerekmez
     rollupOptions: {
-      input: {
-        main: './index.html'
-      },
+      input: './index.html', // Tek giriş noktası
       output: {
-        manualChunks: {
-          vendor: ['web-vitals'],
-          utils: [
-            './assets/js/language.js',
-            './assets/js/navigation.js'
-          ]
-        }
+        // Static site için basit çıktı
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     },
     terserOptions: {
@@ -33,7 +28,8 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true
       }
-    }
+    },
+    copyPublicDir: true
   },
   server: {
     port: 3000,
@@ -43,8 +39,5 @@ export default defineConfig({
   preview: {
     port: 4173,
     host: true
-  },
-  optimizeDeps: {
-    include: ['web-vitals']
   }
 })
