@@ -1243,7 +1243,7 @@
           <ul class="blog-posts-list">
 
             <li class="blog-post-item">
-              <a href="javascript:void(0);" class="blog-open" data-blog-id="1">
+              <a href="javascript:void(0);" class="blog-open" data-blog-id="blog1">
 
                 <figure class="blog-banner-box">
                   <img src="./assets/images/blog-1.jpg" alt="Web Geliştirme Yolculuğum" loading="lazy">
@@ -1271,7 +1271,7 @@
             </li>
 
             <li class="blog-post-item">
-              <a href="javascript:void(0);" class="blog-open" data-blog-id="2">
+              <a href="javascript:void(0);" class="blog-open" data-blog-id="blog2">
 
                 <figure class="blog-banner-box">
                   <img src="./assets/images/blog-2.jpg" alt="WordPress Eklenti Geliştirme" loading="lazy">
@@ -1299,7 +1299,7 @@
             </li>
 
             <li class="blog-post-item">
-              <a href="javascript:void(0);" class="blog-open" data-blog-id="3">
+              <a href="javascript:void(0);" class="blog-open" data-blog-id="blog3">
 
                 <figure class="blog-banner-box">
                   <img src="./assets/images/blog-3.jpg" alt="Açık Kaynak Yazılım" loading="lazy">
@@ -1330,42 +1330,7 @@
 
         </section>
         
-        <!-- Blog Modal Containers -->
-        <div id="blog-modal-1" class="modal-container" style="display: none;">
-          <div class="blog-modal">
-            <div class="modal-close">&times;</div>
-            <h3 class="blog-modal-title">Web Geliştirme Yolculuğum</h3>
-            <div class="blog-modal-meta">1 Mayıs 2023 | Web Geliştirme</div>
-            <div class="blog-modal-content">
-              <p>Web geliştirme yolculuğumda kullandığım teknolojiler ve öğrenme sürecim hakkında detaylı bir yazı. Front-end tarafında HTML, CSS ve JavaScript ile başlayan yolculuğum, zamanla React ve Vue.js gibi modern framework'lere doğru ilerledi.</p>
-              <p>Ardından back-end tarafında PHP öğrenerek tam yığın (full-stack) geliştirici olma yolunda ilerledim. Bu süreçte karşılaştığım zorluklar ve bunları nasıl aştığım hakkında ipuçları bulabilirsiniz.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div id="blog-modal-2" class="modal-container" style="display: none;">
-          <div class="blog-modal">
-            <div class="modal-close">&times;</div>
-            <h3 class="blog-modal-title">WordPress'te Özel Eklenti Geliştirme</h3>
-            <div class="blog-modal-meta">15 Nisan 2023 | WordPress</div>
-            <div class="blog-modal-content">
-              <p>WordPress için özel eklenti geliştirme sürecimi anlattığım bu yazıda, ACF ve WPForms'un gücünden nasıl yararlandığımı okuyabilirsiniz. Kurumsal müşterilerim için geliştirdiğim özel rezervasyon ve form sistemleri, işlerini daha verimli hale getirdi.</p>
-              <p>Yazıda ayrıca WordPress eklenti geliştirme için gerekli temel bilgiler ve en iyi uygulamalar da yer alıyor. Kendi eklentinizi geliştirmek istiyorsanız, bu rehber size yardımcı olabilir.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div id="blog-modal-3" class="modal-container" style="display: none;">
-          <div class="blog-modal">
-            <div class="modal-close">&times;</div>
-            <h3 class="blog-modal-title">Açık Kaynak Projelere Katkıda Bulunmak</h3>
-            <div class="blog-modal-meta">20 Mart 2023 | Açık Kaynak</div>
-            <div class="blog-modal-content">
-              <p>Açık kaynak projelere katkıda bulunmanın hem kişisel gelişim hem de topluluk için ne kadar önemli olduğunu anlatan bu yazıda, GitHub üzerinden pull request göndererek başladığım yolculuğun kariyer gelişimimdeki etkilerini paylaşıyorum.</p>
-              <p>Açık kaynak projeler, kodlama becerilerinizi geliştirmek, yeni insanlarla tanışmak ve sektördeki en iyi uygulamaları öğrenmek için mükemmel bir platformdur. Bu yazıda, başlangıç yapacaklar için ipuçları ve tavsiyeler de bulabilirsiniz.</p>
-            </div>
-          </div>
-        </div>
+
 
       </article>
 
@@ -2283,89 +2248,63 @@
         });
       }
       
-      // Modal container'ları HTML içerisine doğrudan ekleyelim
-      // Önce modal container'ları oluşturalım
-      const blogModalHtml = `
-      <div id="blog-modal-container" class="modal-container" style="display: none;">
-        <div class="blog-modal">
-          <div class="blog-modal-close">&times;</div>
-          <h3 id="blog-modal-title" class="h3"></h3>
-          <div id="blog-modal-meta" class="blog-meta"></div>
-          <div id="blog-modal-content"></div>
-        </div>
-      </div>
-      `;
-      
-      const projectModalHtml = `
-      <div id="project-modal-container" class="modal-container" style="display: none;">
-        <div class="project-modal">
-          <div class="project-modal-close">&times;</div>
-          <h3 id="project-modal-title" class="h3"></h3>
-          <div id="project-modal-category"></div>
-          <div id="project-modal-content"></div>
-          <div id="project-modal-links"></div>
-        </div>
-      </div>
-      `;
-      
-      // Modal HTML'lerini body'ye ekle
-      document.body.insertAdjacentHTML('beforeend', blogModalHtml);
-      document.body.insertAdjacentHTML('beforeend', projectModalHtml);
-      
-      // Modal elementlerini seç
-      const blogModalContainer = document.getElementById('blog-modal-container');
-      const projectModalContainer = document.getElementById('project-modal-container');
-      
-      // Blog linkleri için tıklama olayı
-      const blogLinks = document.querySelectorAll('.blog-open');
-      console.log('Blog link sayısı:', blogLinks.length);
-      
-      blogLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          console.log('Blog link tıklandı:', this.getAttribute('data-blog-id'));
-          e.preventDefault();
-          const blogId = this.getAttribute('data-blog-id');
-          openBlogModal(blogId);
+      // DOM yüklendikten sonra modal işlemlerini başlat
+      document.addEventListener('DOMContentLoaded', function() {
+        // Modal elementlerini seç
+        const blogModalContainer = document.getElementById('blog-modal-container');
+        const projectModalContainer = document.getElementById('project-modal-container');
+        
+        // Blog linkleri için tıklama olayı
+        const blogLinks = document.querySelectorAll('.blog-open');
+        console.log('Blog link sayısı:', blogLinks.length);
+        
+        blogLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            console.log('Blog link tıklandı:', this.getAttribute('data-blog-id'));
+            e.preventDefault();
+            const blogId = this.getAttribute('data-blog-id');
+            openBlogModal(blogId);
+          });
         });
-      });
-      
-      // Proje linkleri için tıklama olayı
-      const projectLinks = document.querySelectorAll('.project-open');
-      console.log('Proje link sayısı:', projectLinks.length);
-      
-      projectLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          console.log('Proje link tıklandı:', this.getAttribute('data-project-id'));
-          e.preventDefault();
-          const projectId = this.getAttribute('data-project-id');
-          openProjectModal(projectId);
+        
+        // Proje linkleri için tıklama olayı
+        const projectLinks = document.querySelectorAll('.project-open');
+        console.log('Proje link sayısı:', projectLinks.length);
+        
+        projectLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            console.log('Proje link tıklandı:', this.getAttribute('data-project-id'));
+            e.preventDefault();
+            const projectId = this.getAttribute('data-project-id');
+            openProjectModal(projectId);
+          });
         });
-      });
-      
-      // Modal kapatma düğmeleri için olay dinleyicileri
-      const blogModalClose = document.querySelector('#blog-modal-container .blog-modal-close');
-      const projectModalClose = document.querySelector('#project-modal-container .project-modal-close');
-      
-      if (blogModalClose) {
-        blogModalClose.addEventListener('click', function() {
-          blogModalContainer.style.display = 'none';
-        });
-      }
-      
-      if (projectModalClose) {
-        projectModalClose.addEventListener('click', function() {
-          projectModalContainer.style.display = 'none';
-        });
-      }
-      
-      // Dış tıklama ile modal kapatma
-      window.addEventListener('click', function(e) {
-        if (e.target === blogModalContainer) {
-          blogModalContainer.style.display = 'none';
+        
+        // Modal kapatma düğmeleri için olay dinleyicileri
+        const blogModalClose = document.querySelector('#blog-modal-container .blog-modal-close');
+        const projectModalClose = document.querySelector('#project-modal-container .project-modal-close');
+        
+        if (blogModalClose) {
+          blogModalClose.addEventListener('click', function() {
+            blogModalContainer.style.display = 'none';
+          });
         }
-        if (e.target === projectModalContainer) {
-          projectModalContainer.style.display = 'none';
+        
+        if (projectModalClose) {
+          projectModalClose.addEventListener('click', function() {
+            projectModalContainer.style.display = 'none';
+          });
         }
+        
+        // Dış tıklama ile modal kapatma
+        window.addEventListener('click', function(e) {
+          if (e.target === blogModalContainer) {
+            blogModalContainer.style.display = 'none';
+          }
+          if (e.target === projectModalContainer) {
+            projectModalContainer.style.display = 'none';
+          }
+        });
       });
       
       // Functions to open modals and populate content
