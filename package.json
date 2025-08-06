@@ -1,0 +1,66 @@
+{
+  "name": "ali-kok-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio website for Ali Kök - Software Developer",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint assets/js/**/*.js",
+    "lint:fix": "eslint assets/js/**/*.js --fix",
+    "optimize:images": "imagemin assets/images/**/* --out-dir=assets/images/optimized",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "analyze": "vite-bundle-analyzer",
+    "lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html"
+  },
+  "keywords": [
+    "portfolio",
+    "web-developer",
+    "javascript",
+    "python",
+    "flask",
+    "responsive-design",
+    "pwa"
+  ],
+  "author": "Ali Kök <alikokrtv@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alikokrtv/vcard-personal-portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alikokrtv/vcard-personal-portfolio/issues"
+  },
+  "homepage": "https://alikokrtv.github.io",
+  "devDependencies": {
+    "vite": "^5.0.8",
+    "@vitejs/plugin-legacy": "^5.2.0",
+    "eslint": "^8.56.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.7.0",
+    "imagemin": "^8.0.1",
+    "imagemin-webp": "^8.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "lighthouse": "^11.4.0",
+    "vite-bundle-analyzer": "^0.7.0"
+  },
+  "dependencies": {
+    "web-vitals": "^3.5.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

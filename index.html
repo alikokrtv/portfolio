@@ -6,11 +6,48 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ali Kök - Kişisel Portfolyo</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Ali Kök - Yazılım Geliştirme Uzmanı. Full-stack developer portfolyosu ve projeleri. Web geliştirme, Python, Flask ve modern teknolojiler.">
+  <meta name="keywords" content="Ali Kök, yazılım geliştirici, web developer, full-stack, Python, Flask, JavaScript, portfolyo">
+  <meta name="author" content="Ali Kök">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Ali Kök - Software Developer Portfolio">
+  <meta property="og:description" content="Professional software developer specializing in web technologies, Python, and modern frameworks.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alikokrtv.github.io">
+  <meta property="og:image" content="./assets/images/my-avatar.png">
+  <meta property="og:site_name" content="Ali Kök Portfolio">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:locale:alternate" content="en_US">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ali Kök - Software Developer Portfolio">
+  <meta name="twitter:description" content="Professional software developer specializing in web technologies and modern frameworks.">
+  <meta name="twitter:image" content="./assets/images/my-avatar.png">
+  
+  <!-- Security Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  
+  <!-- Theme Color for Mobile -->
+  <meta name="theme-color" content="#ffdb70">
+  <meta name="msapplication-TileColor" content="#ffdb70">
 
   <!--
     - favicon
   -->
   <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ali Kök Portfolio">
+  <link rel="apple-touch-icon" href="./assets/images/my-avatar.png">
 
   <!--
     - custom css link
@@ -18,9 +55,156 @@
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/modal.css">
   
+  <!-- Critical CSS for above-the-fold content -->
+  <style>
+    /* Critical CSS - Above the fold content */
+    :root {
+      --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
+      --orange-yellow-crayola: hsl(45, 100%, 72%);
+      --light-gray: hsl(0, 0%, 84%);
+      --smoky-black: hsl(0, 0%, 7%);
+      --jet: hsl(0, 0%, 22%);
+      --eerie-black-1: hsl(240, 2%, 13%);
+      --transition-1: 0.25s ease;
+      --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: "Poppins", sans-serif; 
+      background: var(--smoky-black);
+      color: var(--light-gray);
+      line-height: 1.6;
+    }
+    
+    /* Critical layout for main container */
+    main { 
+      margin: 15px 12px; 
+      margin-bottom: 75px; 
+      min-height: calc(100vh - 150px);
+    }
+    
+    .sidebar {
+      background: var(--bg-gradient-onyx);
+      border: 1px solid var(--jet);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: var(--shadow-2);
+      margin-bottom: 15px;
+    }
+    
+    .sidebar-info { text-align: center; }
+    
+    .avatar-box { 
+      position: relative; 
+      background: var(--bg-gradient-onyx);
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+    }
+    
+    .info-content .name {
+      color: var(--light-gray);
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    
+    .info-content .title {
+      color: var(--light-gray);
+      background: var(--eerie-black-1);
+      font-size: 11px;
+      font-weight: 300;
+      width: max-content;
+      margin: auto;
+      padding: 3px 12px;
+      border-radius: 8px;
+    }
+    
+    .main-content {
+      position: relative;
+      background: var(--bg-gradient-onyx);
+      border: 1px solid var(--jet);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: var(--shadow-2);
+      z-index: 1;
+    }
+    
+    /* Responsive adjustments for mobile */
+    @media (min-width: 580px) {
+      main { 
+        margin: 30px; 
+        margin-bottom: 100px; 
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 25px;
+      }
+      
+      .sidebar { margin-bottom: 0; }
+    }
+  </style>
+  
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ali Kök",
+    "jobTitle": "Software Development Specialist",
+    "description": "Full-stack developer specializing in web technologies, Python, Flask, and modern frameworks",
+    "url": "https://alikokrtv.github.io",
+    "image": "./assets/images/my-avatar.png",
+    "email": "alikokrtv@gmail.com",
+    "telephone": "+905417759351",
+    "birthDate": "1995-09-09",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "İstanbul",
+      "addressCountry": "TR"
+    },
+    "sameAs": [
+      "https://github.com/alikokrtv"
+    ],
+    "knowsAbout": [
+      "Web Development",
+      "Python",
+      "Flask",
+      "JavaScript",
+      "WordPress",
+      "Full-stack Development"
+    ]
+  }
+  </script>
+
+  <!-- Performance Monitoring -->
+  <script src="./assets/js/performance.js"></script>
+  
+  <!-- Image Optimization -->
+  <script src="./assets/js/image-optimization.js"></script>
+  
   <!-- Language and Project Data Scripts -->
   <script src="./assets/js/language.js"></script>
   <script src="./assets/js/project-data.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((registration) => {
+            console.log('✅ SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            console.log('❌ SW registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
 
   <!--
     - google font link
@@ -43,6 +227,37 @@
       z-index: 100;
       font-size: 14px;
       font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .language-toggle:hover {
+      background: var(--orange-yellow-crayola);
+      color: var(--smoky-black);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 219, 112, 0.3);
+    }
+    
+    .language-toggle:focus-visible {
+      outline: 2px solid var(--orange-yellow-crayola);
+      outline-offset: 2px;
+    }
+    
+    /* Image optimization - WebP support fallback */
+    .avatar-box img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+    
+    /* Lazy loading optimization */
+    img[loading="lazy"] {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    img[loading="lazy"].loaded {
+      opacity: 1;
     }
     
     .en {
@@ -118,7 +333,13 @@
 
 <body>
 
-  <button class="language-toggle" id="language-toggle">English</button>
+  <button class="language-toggle" 
+          id="language-toggle" 
+          aria-label="Dil değiştir - English'e geç"
+          role="button"
+          tabindex="0">
+    English
+  </button>
 
   <!--
     - #MAIN
@@ -135,7 +356,10 @@
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="./assets/images/avatars.jpg" alt="Ali Kök" width="80">
+          <picture>
+            <source srcset="./assets/images/avatars.webp" type="image/webp">
+            <img src="./assets/images/avatars.jpg" alt="Ali Kök - Yazılım Geliştirme Uzmanı" width="80" height="80" loading="eager">
+          </picture>
         </figure>
 
         <div class="info-content">
@@ -148,23 +372,29 @@
           <p class="education en">Gazi ATL - Information Technologies</p>
         </div>
 
-        <button class="info_more-btn" data-sidebar-btn>
+        <button class="info_more-btn" 
+                data-sidebar-btn
+                aria-expanded="false"
+                aria-controls="sidebar-info-more"
+                aria-label="İletişim bilgilerini göster/gizle">
           <span>İletişim</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
+          <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
         </button>
 
       </div>
 
-      <div class="sidebar-info_more">
+      <div class="sidebar-info_more" 
+           id="sidebar-info-more"
+           role="region"
+           aria-label="İletişim bilgileri">
 
         <div class="separator"></div>
 
-        <ul class="contacts-list">
+        <ul class="contacts-list" role="list">
 
-          <li class="contact-item">
+          <li class="contact-item" role="listitem">
 
-            <div class="icon-box">
+            <div class="icon-box" aria-hidden="true">
               <ion-icon name="mail-outline"></ion-icon>
             </div>
 
@@ -172,7 +402,11 @@
               <p class="contact-title tr">E-posta</p>
               <p class="contact-title en">Email</p>
 
-              <a href="mailto:alikokrtv@gmail.com" class="contact-link">alikokrtv@gmail.com</a>
+              <a href="mailto:alikokrtv@gmail.com" 
+                 class="contact-link"
+                 aria-label="E-posta gönder: alikokrtv@gmail.com">
+                alikokrtv@gmail.com
+              </a>
             </div>
 
           </li>
@@ -226,23 +460,31 @@
 
         <div class="separator"></div>
 
-        <ul class="social-list">
+        <ul class="social-list" role="list" aria-label="Sosyal medya bağlantıları">
 
-          <li class="social-item">
-            <a href="https://github.com/alikokrtv" class="social-link" target="_blank">
-              <ion-icon name="logo-github"></ion-icon>
+          <li class="social-item" role="listitem">
+            <a href="https://github.com/alikokrtv" 
+               class="social-link" 
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="GitHub profilini ziyaret et (yeni sekmede açılır)">
+              <ion-icon name="logo-github" aria-hidden="true"></ion-icon>
             </a>
           </li>
 
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
+          <li class="social-item" role="listitem">
+            <a href="#" 
+               class="social-link"
+               aria-label="LinkedIn profilini ziyaret et">
+              <ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon>
             </a>
           </li>
 
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
+          <li class="social-item" role="listitem">
+            <a href="#" 
+               class="social-link"
+               aria-label="Instagram profilini ziyaret et">
+              <ion-icon name="logo-instagram" aria-hidden="true"></ion-icon>
             </a>
           </li>
 
@@ -266,40 +508,56 @@
         - #NAVBAR
       -->
 
-      <nav class="navbar">
+      <nav class="navbar" role="navigation" aria-label="Ana navigasyon">
 
-        <ul class="navbar-list">
+        <ul class="navbar-list" role="menubar">
 
-          <li class="navbar-item">
-            <button class="navbar-link active" data-nav-link="about">
+          <li class="navbar-item" role="none">
+            <button class="navbar-link active" 
+                    data-nav-link="about"
+                    role="menuitem"
+                    aria-current="page"
+                    tabindex="0">
               <span class="tr">Hakkımda</span>
               <span class="en">About</span>
             </button>
           </li>
 
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link="resume">
+          <li class="navbar-item" role="none">
+            <button class="navbar-link" 
+                    data-nav-link="resume"
+                    role="menuitem"
+                    tabindex="-1">
               <span class="tr">Özgeçmiş</span>
               <span class="en">Resume</span>
             </button>
           </li>
 
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link="portfolio">
+          <li class="navbar-item" role="none">
+            <button class="navbar-link" 
+                    data-nav-link="portfolio"
+                    role="menuitem"
+                    tabindex="-1">
               <span class="tr">Portfolio</span>
               <span class="en">Portfolio</span>
             </button>
           </li>
 
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link="blog">
+          <li class="navbar-item" role="none">
+            <button class="navbar-link" 
+                    data-nav-link="blog"
+                    role="menuitem"
+                    tabindex="-1">
               <span class="tr">Blog</span>
               <span class="en">Blog</span>
             </button>
           </li>
 
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link="contact">
+          <li class="navbar-item" role="none">
+            <button class="navbar-link" 
+                    data-nav-link="contact"
+                    role="menuitem"
+                    tabindex="-1">
               <span class="tr">İletişim</span>
               <span class="en">Contact</span>
             </button>
@@ -342,19 +600,21 @@
           </p>
         </section>
         
-        <section class="about-text tr">
+        <section class="about-text en">
           <p>
-            Yazılım geliştirmeye tutkuyla bağlı, yaratıcı projeler üretmeye odaklı bir geliştiriciyim. Hem teknik altyapı hem de görsel tasarım alanlarında tecrübeliyim. İstanbul'da yaşıyorum, öğrenmeye ve gelişmeye aç biriyim. Zengin içerikli projeler geliştirip topluma fayda sağlamak ve kendi girişimlerimle değer yaratmak istiyorum.
+            Hello! I'm Ali Kök, a versatile professional living in Istanbul, working in software development and design fields. I define myself as a "problem solver" because turning every technical challenge I encounter into a learning opportunity is both exciting and developmental for me.
           </p>
 
           <p>
             After being introduced to programming, I began combining my creative skills like graphic design and video editing with technical knowledge to produce more powerful projects. I've worked in many different areas: portal systems, mobile app management, websites, WordPress plugins, API integrations, e-commerce management, design, and even video editing and in-store display systems.
           </p>
-        </section>
-        
-        <section class="about-text en">
+          
           <p>
-            I am a developer passionate about software development and focused on creating innovative projects. I am experienced in both technical infrastructure and visual design. Living in Istanbul, I am eager to learn and develop. I aim to develop rich content projects that benefit society and create value with my own ventures.
+            Currently, I work as a software development specialist in the IT department. Having started this journey as a designer in the creative team, I can now offer comprehensive solutions with the experience I've gained in both technical and visual fields.
+          </p>
+          
+          <p>
+            My future goal is to transfer my knowledge and experience to my own projects, develop products that benefit people, and continuously renew myself on this path. I'm eager to learn; new technologies, creative ideas, and solution-oriented approaches always motivate me.
           </p>
         </section>
 
@@ -2135,15 +2395,30 @@
           
           // Show loading state
           formResult.style.display = 'block';
-          formResult.innerHTML = '<p>Mesaj gönderiliyor...</p>';
+          const currentLang = document.documentElement.lang;
+          
+          const messages = {
+            'tr': {
+              sending: 'Mesaj gönderiliyor...',
+              success: 'Mesajınız başarıyla gönderildi!',
+              error: 'Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.'
+            },
+            'en': {
+              sending: 'Sending message...',
+              success: 'Your message has been sent successfully!',
+              error: 'An error occurred while sending the message. Please try again.'
+            }
+          };
+          
+          formResult.innerHTML = `<p>${messages[currentLang].sending}</p>`;
           
           // Send the email using EmailJS ve güvenli gönderim
           emailjs.sendForm('service_3jxhhgr', 'template_1lq7l2k', this, 'iwzl pleq kiqt sgvn')
             .then(function() {
-              formResult.innerHTML = '<p style="color: var(--orange-yellow-crayola);">Mesajınız başarıyla gönderildi!</p>';
+              formResult.innerHTML = `<p style="color: var(--orange-yellow-crayola);">${messages[currentLang].success}</p>`;
               contactForm.reset();
             }, function(error) {
-              formResult.innerHTML = '<p style="color: red;">Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.</p>';
+              formResult.innerHTML = `<p style="color: red;">${messages[currentLang].error}</p>`;
               console.error('EmailJS Error:', error);
             });
         });
